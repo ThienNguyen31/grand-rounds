@@ -69,7 +69,7 @@ The frontier is empty and the user has confirmed this summary. Write it to
 - Sources supplied: <files> | to be researched (databases allowed: …)
 - Core message (one sentence the audience should remember):
 - Must include / must avoid:
-- Figures: reuse originals? motion graphics? (level)
+- Figures: reuse originals? motion graphics? (level) · AI image account: ChatGPT | Gemini | both | none
 - Patient data: none | de-identified, consent: …
 - Open items:
 ```

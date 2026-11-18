@@ -52,7 +52,8 @@ for every question, and give the reason in one clause.
   recoloured and animated (medical-figures). Rebuild from numbers only when there is no PDF
   or the figure is raster and unreadable. Flag reuse rights if the talk will be recorded.
 - Motion graphics: none · subtle reveals · explanatory mechanism animation (HTML only)
-- Medical illustrations: licensed libraries (Servier Medical Art first), AI-generated through the user's own ChatGPT or Gemini account (anatomy checked before use), or the user's own images? Recommend Servier for standard anatomy and AI for views no library has.
+- Medical illustrations: libraries first (Servier Medical Art, Bioicons, NIH BioArt), AI-generated only when no library has the picture, or the user's own images?
+- If AI may be needed: which account does the user have, ChatGPT, Gemini, both or neither? Record it in the brief (Figures line); it decides which service is used, and "neither" means no AI images.
 
 ### Template branch (when a template is supplied)
 - Use its title and closing layouts as-is? Keep its logo (check the event allows it)?

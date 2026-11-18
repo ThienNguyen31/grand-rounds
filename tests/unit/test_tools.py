@@ -115,7 +115,9 @@ class TestCheckClaims(unittest.TestCase):
         self.assertEqual(c("1.234.567"), 1234567)
 
     def test_numbers_skip_years_pages_ci_label(self):
-        nums = [v for _, v in self.mod.numbers("In 2026, HR 0,62 (95% CI 0,47–0,81) 3 / 8")]
+        nums = [v for _, v in self.mod.numbers("In 2026, HR 0,62 (95% CI 0,47–0,81); icons CC BY 3.0, CC-BY-SA-4.0 3 / 8")]
+        self.assertNotIn(3.0, nums)
+        self.assertNotIn(4.0, nums)
         self.assertIn(0.62, nums)
         self.assertNotIn(2026, nums)
         self.assertNotIn(95, nums)
@@ -352,3 +354,26 @@ class TestLintCredits(unittest.TestCase):
         found = [(f["id"], f["slide"]) for f in mod.lint_html(tmp, "en", None)]
         self.assertNotIn(("S03", 2), found)
         self.assertIn(("S03", 3), found)
+
+
+class TestBioicons(unittest.TestCase):
+    def test_clean_prefixes_ids_and_strips_inkscape(self):
+        mod = load("medical-figures/scripts/bioicons.py", "bioicons")
+        raw = ('<?xml version="1.0"?><!-- c --><svg width="10mm" height="12mm" viewBox="0 0 10 12" '
+               'xmlns:inkscape="x" xmlns:sodipodi="y" xmlns="http://www.w3.org/2000/svg">'
+               '<sodipodi:namedview id="nv"><inkscape:page id="p"/></sodipodi:namedview>'
+               '<defs><clipPath id="a"><path d="M0 0h1v1z"/></clipPath></defs>'
+               '<path clip-path="url(#a)" inkscape:label="L" d="M0 0"/><use href="#a"/></svg>')
+        out = mod.clean(raw, "tcell")
+        self.assertNotIn("sodipodi", out)
+        self.assertNotIn("inkscape", out)
+        self.assertNotIn('width="10mm"', out)
+        self.assertIn('id="tcell-a"', out)
+        self.assertIn("url(#tcell-a)", out)
+        self.assertIn('href="#tcell-a"', out)
+        self.assertTrue(out.startswith("<svg"))
+
+    def test_credit_line(self):
+        mod = load("medical-figures/scripts/bioicons.py", "bioicons2")
+        c = mod.credit({"name": "t-lymphocyte", "author": "Servier", "licence": "cc-by-3.0"})
+        self.assertEqual(c, '"t-lymphocyte" by Servier (Bioicons), CC BY 3.0')

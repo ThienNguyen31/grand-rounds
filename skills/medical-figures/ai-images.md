@@ -9,8 +9,12 @@ workflow below keeps what they are good at (rendering) and removes what they are
 slide. **Never use for:** histology, radiology, ECGs, clinical photographs, anything an
 audience could read as a real finding, or a patient's likeness.
 
-Ask the user before the first generation in a deck: which service (ChatGPT or Gemini),
-and that their own signed-in account will be used.
+Generate only after the libraries have been searched (`illustrations.md`, order of
+preference) and nothing suitable was found. Use the service the user has an account for,
+as recorded in the brief: ChatGPT, Gemini, or either if they have both. If the brief doesn't
+say, ask in one line before the first generation. If the user has neither, don't generate:
+use a library picture or a simpler schematic instead. In all cases their own signed-in
+account is used.
 
 ## 1. Prompt
 
@@ -37,7 +41,9 @@ Any browser tool the harness has will do: the Playwright MCP, Claude in Chrome, 
 Claude desktop browser, or Antigravity's browser. Use the user's own session and never
 handle their password: if the page asks for a login, ask the user to sign in.
 
-1. Open `https://chatgpt.com/images` (or `https://gemini.google.com`, image mode).
+1. Open `https://chatgpt.com/images` (ChatGPT) or `https://gemini.google.com` (Gemini;
+   start the prompt with "Create an image:"). To check which service is signed in, open the
+   page and look for a login button before typing.
 2. Click the prompt box, type the prompt and press Enter. Generation takes 30–90 s. Wait,
    then check for the finished image (`img` with alt "Generated image…", or the largest
    image on the page).
@@ -51,7 +57,10 @@ handle their password: if the page asks for a login, ask the user to sign in.
    document.body.append(a); a.click(); a.remove();
    ```
 
-   Move the file from the Downloads folder into `<talk>/figures/ai/`.
+   Move the file from the Downloads folder into `<talk>/figures/ai/`. Gemini shows a
+   "Download full size image" button on the image: use it when a cross-origin image can't
+   be fetched from the page. The ChatGPT route has been tested; the Gemini route has not
+   yet.
 4. If it's wrong, regenerate or ask for a specific change in the same chat ("make the left
    ventricular wall twice as thick; remove the arrows"). Edits keep the composition.
 

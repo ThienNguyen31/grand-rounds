@@ -1,7 +1,8 @@
 {"figures": [
-  {"file": "s02-checkpoint (inline in slide 2)", "slide": 2, "kind": "animation",
+  {"file": "s02-checkpoint.svg (made by figures/make_mechanism.py)", "slide": 2, "kind": "animation",
    "source": "textbook mechanism of PD-1/PD-L1 blockade", "locator": "",
-   "licence": "original drawing, MIT (this repository)", "modifications": "", "claims": []},
+   "licence": "composition MIT; cell and antibody icons from Bioicons (see figures/icons/ATTRIBUTION.md): t-lymphocyte and cancerous-cell-1 by Servier, CC BY 3.0; immuneglobuline_igG_blue by Helicase_11, CC BY 4.0",
+   "modifications": "icons placed and animated; receptor glyphs drawn", "claims": []},
   {"file": "s03-schema (inline HTML/SVG)", "slide": 3, "kind": "rebuilt", "source": "nova1", "locator": "p. 2, Methods; p. 4",
    "licence": "original drawing from claims", "modifications": "", "claims": ["c01", "c02", "c03"]},
   {"file": "s04-consort (inline HTML/SVG)", "slide": 4, "kind": "rebuilt", "source": "nova1", "locator": "p. 4",

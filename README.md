@@ -15,14 +15,14 @@
   <img alt="Claude Code" src="https://img.shields.io/badge/Claude%20Code-plugin-C8372D">
   <img alt="Codex" src="https://img.shields.io/badge/Codex-skills-56677F">
   <img alt="Antigravity" src="https://img.shields.io/badge/Antigravity-plugin-56677F">
-  <img alt="Tests" src="https://img.shields.io/badge/unit%20tests-24%20passing-2E7D32">
+  <img alt="Tests" src="https://img.shields.io/badge/unit%20tests-26%20passing-2E7D32">
 </p>
 
 <p align="center">
   <img src="assets/screenshots/mechanism.gif" width="49%" alt="Looping motion graphic: PD-1/PD-L1 checkpoint blockade in four stages">
   <img src="assets/screenshots/cardiac-cycle.gif" width="49%" alt="Cardiac cycle: four Servier Medical Art drawings highlighted in turn">
 </p>
-<p align="center"><sub>Motion inside the slide instead of a pasted video: a coded mechanism (left) and a sequence of licensed illustrations played as a loop (right).</sub></p>
+<p align="center"><sub>Motion inside the slide instead of a pasted video: a mechanism built from Bioicons cells and antibody (left) and a sequence of Servier Medical Art drawings played as a loop (right).</sub></p>
 
 ---
 
@@ -122,14 +122,16 @@ my-talk/
 - **Your template, measured.** `scan_template.py` reports the layouts and title positions
   that the template's own slides use, so the deck sits inside the template rather than
   imitating it.
-- **Beautiful illustrations, correct labels.** Standard anatomy comes from Servier Medical
-  Art (exported at full resolution from its vector PowerPoint kits). Anything a library
-  lacks can be generated with ChatGPT or Gemini through your own signed-in browser, with no
-  text in the pixels. The anatomy is then checked against a reference, and the labels are
-  laid out as editable text with leader lines (`label_figure.py`, or native text boxes in
-  PPTX).
-- **Motion graphics instead of videos.** A mechanism, a pathway or blood moving through the
-  heart is coded as an SVG that loops inside the slide like a GIF. It stays sharp on any
+- **Libraries first, AI second, labels always editable.** Illustrations come first from
+  existing medical libraries: Servier Medical Art (exported at full resolution from its
+  vector PowerPoint kits) and Bioicons (`bioicons.py` searches ~2,800 icons and writes the
+  credits). Only when no library has the picture is one generated, with ChatGPT or Gemini,
+  whichever account you have, through your own signed-in browser and with no text in the
+  pixels. Its anatomy is then checked against a reference. Labels are laid out as editable
+  text with leader lines (`label_figure.py`, or native text boxes in PPTX).
+- **Motion graphics instead of videos.** A mechanism or a pathway is assembled from Bioicons
+  parts (cells, antibodies, receptors) and animated in CSS, so it loops inside the slide like
+  a GIF. It stays sharp on any
   projector, weighs kilobytes, carries a caption per stage, and pauses on a poster frame
   for PDF export and screenshots.
 - **Motion that doesn't stutter.** Only transform and opacity are animated. The render
@@ -182,6 +184,7 @@ when it applies. Subagents use `invoke_subagent`.
 | Everything except the items below | Python 3.10+ (standard library only) |
 | Lifting figures from PDFs | `pip install pymupdf` |
 | Labels on illustrations | `pip install pillow` |
+| Bioicons search and download | nothing extra (standard library; uses the GitHub API) |
 | AI-generated illustrations | a browser tool (Playwright MCP, Claude in Chrome, Antigravity browser) signed in to your ChatGPT or Gemini account |
 | PPTX build and checks | `pip install python-pptx` |
 | HTML render check, SVG → PNG | `pip install playwright`, then `python -m playwright install chromium`, or use an installed Edge or Chrome |
@@ -289,6 +292,6 @@ consent and de-identification, and for the right to reuse published figures.
 ## Licence
 
 [MIT](LICENSE) © 2026 Trần Quang Hưng. The licence covers this repository's code and text.
-The Servier Medical Art images in the heart example are CC BY 4.0 (see [NOTICE](NOTICE.md)).
+The Servier Medical Art and Bioicons images in the examples keep their own CC BY licences (see [NOTICE](NOTICE.md)).
 The MIT licence does not extend to third-party figures or illustrations you add to your own
 decks.

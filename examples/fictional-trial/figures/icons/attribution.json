@@ -1,0 +1,37 @@
+{
+ "icons": [
+  {
+   "path": "static/icons/cc-by-3.0/Blood_Immunology/Servier/t-lymphocyte.svg",
+   "licence": "cc-by-3.0",
+   "category": "Blood_Immunology",
+   "author": "Servier",
+   "name": "t-lymphocyte",
+   "file": "t-lymphocyte.svg",
+   "url": "https://raw.githubusercontent.com/duerrsimon/bioicons/main/static/icons/cc-by-3.0/Blood_Immunology/Servier/t-lymphocyte.svg",
+   "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+   "credit": "\"t-lymphocyte\" by Servier (Bioicons), CC BY 3.0"
+  },
+  {
+   "path": "static/icons/cc-by-3.0/Oncology/Servier/cancerous-cell-1.svg",
+   "licence": "cc-by-3.0",
+   "category": "Oncology",
+   "author": "Servier",
+   "name": "cancerous-cell-1",
+   "file": "cancerous-cell-1.svg",
+   "url": "https://raw.githubusercontent.com/duerrsimon/bioicons/main/static/icons/cc-by-3.0/Oncology/Servier/cancerous-cell-1.svg",
+   "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+   "credit": "\"cancerous-cell-1\" by Servier (Bioicons), CC BY 3.0"
+  },
+  {
+   "path": "static/icons/cc-by-4.0/Blood_Immunology/Helicase_11/immuneglobuline_igG_blue.svg",
+   "licence": "cc-by-4.0",
+   "category": "Blood_Immunology",
+   "author": "Helicase_11",
+   "name": "immuneglobuline_igG_blue",
+   "file": "immuneglobuline_igG_blue.svg",
+   "url": "https://raw.githubusercontent.com/duerrsimon/bioicons/main/static/icons/cc-by-4.0/Blood_Immunology/Helicase_11/immuneglobuline_igG_blue.svg",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+   "credit": "\"immuneglobuline_igG_blue\" by Helicase_11 (Bioicons), CC BY 4.0"
+  }
+ ]
+}

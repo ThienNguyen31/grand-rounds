@@ -57,6 +57,12 @@ over each step.
 In an HTML deck, put `data-scene="4"` on the SVG: the engine sets class `s0`…`s4` as the
 presenter clicks.
 
+## Parts: Bioicons, not hand-drawn shapes
+
+Build scenes from library parts: cells, antibodies, receptors and organelles from Bioicons
+(`scripts/bioicons.py`), placed as nested `<svg>` elements and animated as groups. Draw only
+the small glyphs no library has. Credit every icon on the slide.
+
 ## Looping motion graphics (instead of a video or GIF)
 
 When the mechanism should simply play, as a video would, build a loop in CSS. It stays
@@ -81,7 +87,7 @@ Worked examples in `examples/`:
 
 | File | Shows |
 |------|-------|
-| `checkpoint-blockade.html` | PD-1/PD-L1 blockade in four stages, 16 s loop, captions and progress line |
+| `checkpoint-blockade.html` | PD-1/PD-L1 blockade in four stages, 16 s loop, captions and progress line; T cell, tumour cell and antibody are Bioicons |
 
 
 A sequence of illustrations (Servier draws the cardiac cycle in four pictures) becomes

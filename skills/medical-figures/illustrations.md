@@ -3,17 +3,40 @@
 Use illustrations to explain, not to decorate. Every image goes into `figures/manifest.json`
 with its source URL, author, licence and the attribution text you printed on the slide.
 
-## Which route
+## Order of preference
 
-| Need | First choice | Then |
-|------|--------------|------|
-| Standard anatomy, organs, physiology, cells | **Servier Medical Art** (accurate, drawn by medical illustrators, CC BY 4.0) | AI-generated, if Servier has nothing suitable (`ai-images.md`) |
-| A specific view, style or composition no library has | **AI-generated**, checked against a reference (`ai-images.md`) | Commission or draw |
-| Molecules, receptors, lab icons | Bioicons, Servier | Simple SVG drawn yourself |
-| Schematic shapes (a cell, a receptor, an antibody) | Simple SVG drawn yourself | — |
+1. **Existing medical image libraries first.** Search them before generating anything:
+   - Servier Medical Art for anatomy, organs, physiology and pathology;
+   - Bioicons for cells, antibodies, receptors, molecules and lab icons;
+   - NIH BioArt, Wikimedia Commons, and open-access figures in PMC.
+   They are drawn by people who checked the science, and their licences are clear.
+2. **AI-generated, only when no library has a suitable picture.** Use ChatGPT Images or
+   Gemini, whichever the user has an account for (asked in the interview), through their own
+   signed-in browser. Check the anatomy against a reference before use (`ai-images.md`).
+3. **Draw it yourself** only for simple schematic glyphs a library lacks (a receptor, a
+   ligand, an arrow). Never draw organs freehand in SVG: hand-coded anatomy looks crude next
+   to illustrator artwork. Code is for labels, arrows, highlights and motion.
 
-Don't draw organs freehand in SVG: hand-coded anatomy looks crude next to illustrator
-artwork. Code is for labels, arrows, highlights and motion on top of a good illustration.
+**Motion graphics use library parts.** Build a mechanism animation from Bioicons cells and
+molecules (`scripts/bioicons.py search` / `get`), and animate those, rather than animating
+hand-drawn circles. Draw only what Bioicons lacks.
+
+## Bioicons in practice
+
+```bash
+python scripts/bioicons.py search t lymphocyte          # licence, category, author, name
+python scripts/bioicons.py get t-lymphocyte cancerous-cell-1 immuneglobuline_igG_blue -o <talk>/figures/icons
+```
+
+`get` cleans each SVG for inlining, prefixes its ids, and writes `ATTRIBUTION.md` and
+`attribution.json` next to the icons. Put the credits on the slide (`data-cite`), for example
+"Icons via Bioicons: T lymphocyte by Servier (CC BY 3.0); IgG by Helicase_11 (CC BY 4.0)".
+Share-alike icons are hidden unless `--allow-sa`.
+
+Place an icon in a scene as a nested `<svg x y width height viewBox>` (keeps it vector and
+editable). Draw receptors and other small parts *before* the cell icon, so their stalks
+disappear under the membrane and only the heads show. Then you don't need to know exactly
+where the icon's outline runs.
 
 ## Libraries
 

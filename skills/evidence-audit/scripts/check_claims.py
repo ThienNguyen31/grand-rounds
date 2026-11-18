@@ -39,6 +39,7 @@ STRIP = [
     re.compile(r"\b(?:19|20)\d{2}\s*;\s*\d+(?:\s*\(\s*\d+\s*\))?(?::\s*[\w-]+)?"),  # 2024;403(10427):632-644
     re.compile(r"\b\d+\s*/\s*\d+\s*$"),                        # page counter at end
     re.compile(r"(?:\b(?:KTC|CI)\s*)?\b(?:90|95|99)\s?%\s*(?:CI|KTC|confidence)?", re.I),  # CI level label
+    re.compile(r"\bCC[\s-]?(?:BY|0)(?:[\s-](?:SA|NC|ND))*(?:[\s-]?\d\.\d)?", re.I),  # licence names: CC BY 4.0
 ]
 
 
