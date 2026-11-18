@@ -1,0 +1,8 @@
+{
+  "name": "medslides",
+  "interface": {"displayName": "MedSlides"},
+  "plugins": [
+    {"name": "medslides", "source": {"source": "url", "url": "./"},
+     "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"}, "category": "Productivity"}
+  ]
+}

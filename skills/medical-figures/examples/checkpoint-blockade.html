@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkpoint blockade: step-wise mechanism example</title>
+<!--
+  Reference implementation for motion.md. Schematic, not to scale.
+  Steps (→ / click): 1 TCR recognises antigen on MHC · 2 PD-L1 engages PD-1, the T cell is
+  inhibited · 3 anti-PD-1 antibody occupies PD-1 · 4 the T cell is reactivated and releases
+  cytotoxic granules; the tumour cell dies. Only transform and opacity are animated.
+-->
+<style>
+  :root { --ink:#1f2933; --muted:#6b7785; --t:#0f7c8a; --t-l:#dff3f5; --tumor:#b8475a; --tumor-l:#f8e4e8;
+          --pd1:#3d5a99; --pdl1:#d9822b; --ab:#6a3fa0; --bg:#fff }
+  html,body { margin:0; height:100%; background:#f3f4f6; font-family:Arial,Helvetica,sans-serif; color:var(--ink) }
+  .wrap { position:absolute; inset:0; display:grid; place-items:center }
+  svg { width:min(100vw, 177.78vh); height:auto; background:var(--bg) }
+  text { font-size:26px; fill:var(--ink) } .lbl-s { font-size:22px; fill:var(--muted) }
+  .anim { transition:transform .9s cubic-bezier(.3,.7,.2,1), opacity .5s ease }
+  /* step 1: antigen recognition */
+  .signal { opacity:0 } .s1 .signal, .s2 .signal, .s3 .signal, .s4 .signal { opacity:1 }
+  /* step 2: PD-L1 engages PD-1 */
+  .pdl1 { transform:translate(70px,0) } .s2 .pdl1 { transform:none }
+  .s3 .pdl1, .s4 .pdl1 { transform:translate(70px,0) }
+  .brake { opacity:0 } .s2 .brake { opacity:1 }
+  .tcell-body { transition:opacity .6s } .s2 .tcell-body { opacity:.45 }
+  /* step 3: antibody docks on PD-1 */
+  .ab { transform:translate(-40px,-260px); opacity:0 } .s3 .ab, .s4 .ab { transform:none; opacity:1 }
+  /* step 4: granules travel, tumour cell dies */
+  .gran { opacity:0; transform:translate(0,0) } .s4 .gran { opacity:1; transform:translate(330px,0) }
+  .s4 .gran:nth-child(2) { transition-delay:.12s } .s4 .gran:nth-child(3) { transition-delay:.24s }
+  .s4 .gran:nth-child(4) { transition-delay:.36s }
+  .tumor { transform-origin:1180px 450px } .s4 .tumor { transform:scale(.86); opacity:.35; transition-delay:1s }
+  .caption { opacity:0; transition:opacity .4s } .caption.on { opacity:1 }
+  @media (prefers-reduced-motion:reduce) { .anim, .tcell-body { transition:none } }
+</style>
+</head>
+<body>
+<div class="wrap">
+<svg viewBox="0 0 1600 900" id="scene" class="s0" role="img" aria-label="PD-1/PD-L1 checkpoint blockade, schematic">
+  <!-- T cell (left) -->
+  <g class="tcell">
+    <circle class="tcell-body" cx="420" cy="450" r="250" fill="var(--t-l)" stroke="var(--t)" stroke-width="4"/>
+    <text x="300" y="460">T cell</text>
+    <!-- TCR at membrane (x≈670) -->
+    <g transform="translate(668 330)"><path d="M0 0h26M0 0v-22M26 0v-22" stroke="var(--t)" stroke-width="8" fill="none" stroke-linecap="round"/></g>
+    <text class="lbl-s" x="560" y="300">TCR</text>
+    <!-- PD-1 at membrane -->
+    <g transform="translate(668 560)"><path d="M0 0h30" stroke="var(--pd1)" stroke-width="10" stroke-linecap="round"/><circle cx="40" cy="0" r="12" fill="var(--pd1)"/></g>
+    <text class="lbl-s" x="560" y="610">PD-1</text>
+    <!-- activation signal -->
+    <g class="signal anim"><circle cx="420" cy="450" r="268" fill="none" stroke="var(--t)" stroke-width="3" stroke-dasharray="6 10"/></g>
+    <!-- brake symbol (step 2) -->
+    <g class="brake anim"><circle cx="420" cy="330" r="38" fill="#fff" stroke="var(--pdl1)" stroke-width="6"/><path d="M394 330h52" stroke="var(--pdl1)" stroke-width="8" stroke-linecap="round"/></g>
+  </g>
+  <!-- tumour cell (right) -->
+  <g class="tumor anim">
+    <path d="M1180 210c140 0 250 110 250 240s-100 250-250 240-260-90-250-240 110-240 250-240z" fill="var(--tumor-l)" stroke="var(--tumor)" stroke-width="4"/>
+    <text x="1110" y="460">Tumour cell</text>
+    <!-- MHC with peptide -->
+    <g transform="translate(905 330)"><path d="M26 -22v22h-26v-22" stroke="var(--tumor)" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="13" cy="-30" r="8" fill="var(--tumor)"/></g>
+    <text class="lbl-s" x="950" y="300">MHC + antigen</text>
+  </g>
+  <!-- PD-L1 on tumour (moves to meet PD-1 in step 2) -->
+  <g class="pdl1 anim"><path d="M760 560h-26" stroke="var(--pdl1)" stroke-width="10" stroke-linecap="round"/><path d="M722 548a12 12 0 0 1 0 24" stroke="var(--pdl1)" stroke-width="8" fill="none"/><path d="M760 560h150" stroke="var(--pdl1)" stroke-width="4" stroke-dasharray="2 8"/></g>
+  <text class="lbl-s" x="930" y="610">PD-L1</text>
+  <!-- anti-PD-1 antibody (Y shape) docks on PD-1 -->
+  <g class="ab anim"><path d="M708 540l0 -50M708 490l-26 -34M708 490l26 -34" stroke="var(--ab)" stroke-width="10" stroke-linecap="round" fill="none"/>
+    <text class="lbl-s" x="742" y="470" style="fill:var(--ab)">anti-PD-1</text></g>
+  <!-- cytotoxic granules (step 4) -->
+  <g><circle class="gran anim" cx="560" cy="420" r="11" fill="var(--t)"/><circle class="gran anim" cx="540" cy="460" r="9" fill="var(--t)"/>
+     <circle class="gran anim" cx="575" cy="490" r="10" fill="var(--t)"/><circle class="gran anim" cx="555" cy="380" r="8" fill="var(--t)"/></g>
+  <!-- step captions (one at a time; full explanation lives in speaker notes) -->
+  <text class="caption" data-step="1" x="800" y="840" text-anchor="middle">TCR recognises a tumour antigen on MHC</text>
+  <text class="caption" data-step="2" x="800" y="840" text-anchor="middle">PD-L1 engages PD-1: the T cell is switched off</text>
+  <text class="caption" data-step="3" x="800" y="840" text-anchor="middle">Anti-PD-1 occupies PD-1, so PD-L1 cannot bind</text>
+  <text class="caption" data-step="4" x="800" y="840" text-anchor="middle">The T cell is released and kills the tumour cell</text>
+</svg>
+</div>
+<script>
+  const scene = document.getElementById('scene'); let step = 0; const max = 4;
+  function render() { scene.setAttribute('class', 's' + step);
+    document.querySelectorAll('.caption').forEach(c => c.classList.toggle('on', +c.dataset.step === step)); }
+  addEventListener('keydown', e => { if (['ArrowRight', ' ', 'PageDown'].includes(e.key)) step = Math.min(max, step + 1);
+    else if (['ArrowLeft', 'PageUp'].includes(e.key)) step = Math.max(0, step - 1); else return; render(); });
+  addEventListener('click', () => { step = step >= max ? 0 : step + 1; render(); });
+  render();
+</script>
+</body>
+</html>

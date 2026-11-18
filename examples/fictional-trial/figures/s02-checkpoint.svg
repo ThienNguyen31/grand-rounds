@@ -1,0 +1,33 @@
+<svg viewBox="0 0 1600 900" class="mech" data-scene="4" role="img" aria-label="PD-1/PD-L1 checkpoint blockade, schematic" font-family="Arial, sans-serif">
+  <!-- T cell -->
+  <g class="tbody"><circle cx="430" cy="430" r="260" fill="#DFF0F3" stroke="#0F7C8A" stroke-width="4"/></g>
+  <text x="330" y="440" font-size="30" fill="#1B2430">T cell</text>
+  <g class="ring"><circle cx="430" cy="430" r="280" fill="none" stroke="#0F7C8A" stroke-width="3" stroke-dasharray="6 10"/></g>
+  <g class="brake"><circle cx="430" cy="300" r="40" fill="#fff" stroke="#D9731F" stroke-width="6"/><path d="M402 300h56" stroke="#D9731F" stroke-width="8" stroke-linecap="round"/></g>
+  <!-- TCR -->
+  <path d="M690 330h30M720 330l22 -16M720 330l22 16" stroke="#0F7C8A" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <text x="600" y="292" font-size="22" fill="#66707C">TCR</text>
+  <!-- PD-1 -->
+  <path d="M690 560h30" stroke="#3D5A99" stroke-width="10" stroke-linecap="round"/><circle cx="732" cy="560" r="13" fill="#3D5A99"/>
+  <text x="590" y="612" font-size="22" fill="#66707C">PD-1</text>
+  <!-- tumour cell -->
+  <g class="tumor"><ellipse cx="1130" cy="430" rx="300" ry="280" fill="#F8E4E8" stroke="#B8475A" stroke-width="4"/>
+    <text x="1040" y="440" font-size="30" fill="#1B2430">Tumour cell</text></g>
+  <!-- MHC + antigen -->
+  <path d="M830 330h-24M806 330v-20M806 330v20" stroke="#B8475A" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <circle cx="786" cy="330" r="9" fill="#B8475A"/>
+  <text x="850" y="292" font-size="22" fill="#66707C">MHC + antigen</text>
+  <!-- PD-L1 (moves to PD-1 at step 2) -->
+  <g class="pdl1"><path d="M830 560h-26" stroke="#D9822B" stroke-width="10" stroke-linecap="round"/><path d="M792 545a15 15 0 0 0 0 30" stroke="#D9822B" stroke-width="8" fill="none" stroke-linecap="round"/></g>
+  <text x="850" y="612" font-size="22" fill="#66707C">PD-L1</text>
+  <!-- anti-PD-1 antibody: Fab arms bind PD-1 from above -->
+  <g class="ab"><path d="M732 470v-50M732 470l-18 70M732 470l18 70" stroke="#6A3FA0" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <text x="756" y="440" font-size="22" fill="#6A3FA0">anti-PD-1</text></g>
+  <!-- cytotoxic granules -->
+  <g class="gr"><circle cx="600" cy="400" r="11" fill="#0F7C8A"/><circle cx="585" cy="440" r="9" fill="#0F7C8A"/><circle cx="605" cy="480" r="10" fill="#0F7C8A"/><circle cx="590" cy="370" r="8" fill="#0F7C8A"/></g>
+  <!-- one caption per step -->
+  <text class="cap c1" x="800" y="860" text-anchor="middle" font-size="30" fill="#1B2430">TCR recognises a tumour antigen on MHC</text>
+  <text class="cap c2" x="800" y="860" text-anchor="middle" font-size="30" fill="#1B2430">PD-L1 engages PD-1: the T cell is switched off</text>
+  <text class="cap c3" x="800" y="860" text-anchor="middle" font-size="30" fill="#1B2430">Anti-PD-1 occupies PD-1, so PD-L1 cannot bind</text>
+  <text class="cap c4" x="800" y="860" text-anchor="middle" font-size="30" fill="#1B2430">Released, the T cell kills the tumour cell</text>
+</svg>

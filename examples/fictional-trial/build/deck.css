@@ -1,0 +1,60 @@
+/* Deck-specific styles for the NOVA-1 demo (theme variables live in index.src.html :root) */
+
+/* mechanism scene: classes s0…s4 are set by the engine from data-scene */
+.mech{display:block;width:1333px;height:750px;margin:0 auto}
+.mech .ring,.mech .brake,.mech .cap{opacity:0;transition:opacity .5s ease}
+.mech .tbody{transition:opacity .6s ease}
+.mech .pdl1{transition:transform .9s cubic-bezier(.3,.7,.2,1)}
+.mech .ab{opacity:0;transform:translate(60px,-240px);transition:transform .9s cubic-bezier(.3,.7,.2,1),opacity .4s}
+.mech .gr circle{opacity:0;transition:transform 1s cubic-bezier(.3,.7,.2,1),opacity .4s}
+.mech .tumor{transform-origin:1130px 430px;transition:transform .9s ease 1s,opacity .9s ease 1s}
+.mech:is(.s1,.s3,.s4) .ring{opacity:1}
+.mech.s2 .pdl1{transform:translateX(-46px)}
+.mech.s2 .brake{opacity:1}
+.mech.s2 .tbody{opacity:.45}
+.mech:is(.s3,.s4) .ab{opacity:1;transform:none}
+.mech.s4 .gr circle{opacity:1;transform:translateX(250px)}
+.mech.s4 .gr circle:nth-child(2){transition-delay:.12s}.mech.s4 .gr circle:nth-child(3){transition-delay:.24s}.mech.s4 .gr circle:nth-child(4){transition-delay:.36s}
+.mech.s4 .tumor{transform:scale(.88);opacity:.4}
+.mech.s1 .c1,.mech.s2 .c2,.mech.s3 .c3,.mech.s4 .c4{opacity:1}
+
+/* diagrams (schema, CONSORT) */
+.dg{position:relative}
+.dg svg.cn{position:absolute;left:0;top:0;overflow:visible}
+.bx{position:absolute;background:#fff;border:2px solid var(--primary);border-radius:14px;padding:16px 22px;font-size:24px;line-height:1.35;color:var(--ink2)}
+.bx h4{margin:0 0 8px;font-size:24px;color:var(--primary)}
+.bx ul{margin:0;padding-left:24px}.bx li{margin:4px 0}
+.bx.armA{border-color:var(--int);background:var(--int-l)}.bx.armA h4{color:var(--int)}
+.bx.armB{border-color:var(--ctl);background:var(--ctl-l)}.bx.armB h4{color:var(--ctl)}
+.bx.ep{background:var(--primary-l)}
+.bx .n{float:right;font-size:30px;font-weight:700}
+.armA .n{color:var(--int)}.armB .n{color:var(--ctl)}
+.rc{position:absolute;width:112px;height:112px;border-radius:50%;background:var(--primary);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:44px;font-weight:700;line-height:1}
+.rc small{font-size:20px;margin-top:4px}
+.c-box{display:flex;align-items:center;justify-content:center;gap:14px;font-size:26px}
+.c-big{font-size:42px;font-weight:700;color:var(--ink)}
+.armA .c-big{color:var(--int)}.armB .c-big{color:var(--ctl)}
+.c-mid{font-size:32px}.c-sm{font-size:20px;color:var(--muted);margin-top:6px}
+
+/* efficacy */
+.km-cols{grid-template-columns:900px 1fr;align-items:center}
+.km-side .pair{font-size:72px;font-weight:700;white-space:nowrap;line-height:1}
+.km-side .pair .a{color:var(--int)}.km-side .pair .b{color:var(--ctl)}
+.km-side .pair i{font-size:28px;color:var(--faint);font-style:normal;font-weight:400;margin:0 14px}
+.km-side .lbl{font-size:24px;color:var(--muted);margin:10px 0 36px}
+.km-side .hr{font-size:32px;color:var(--ink2)}.km-side .hr b{color:var(--ink)}
+
+/* safety */
+#dumb{width:100%;height:auto;display:block}
+#dumb .dmov{transform:translateX(var(--dx))}
+.slide.play #dumb .dmov{transform:none;transition:transform 1s cubic-bezier(.2,.7,.2,1) var(--d)}
+#dumb .dfade{opacity:0}
+.slide.play #dumb .dfade{opacity:1;transition:opacity .4s ease var(--d)}
+.legend{display:flex;flex-direction:column;gap:14px;font-size:24px;margin-top:40px}
+.legend i{display:inline-block;width:18px;height:18px;border-radius:50%;margin-right:12px;vertical-align:-2px}
+.side-note{font-size:26px;margin-top:48px;color:var(--ink2)}
+
+/* take-home */
+ol.tk{margin:30px 0 0;padding-left:1.4em;font-size:36px;line-height:1.4;color:var(--ink2)}
+ol.tk li{margin:0 0 34px;padding-left:.3em}
+ol.tk b{color:var(--ink)}

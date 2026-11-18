@@ -1,0 +1,14 @@
+{
+  "name": "medslides",
+  "description": "MedSlides: evidence-first medical presentation skills for coding agents",
+  "owner": {"name": "Trần Quang Hưng", "url": "https://github.com/drtranquanghung91-vn"},
+  "plugins": [
+    {
+      "name": "medslides",
+      "description": "Evidence-first medical presentations: interview, plan, PubMed-backed research, figures and motion graphics, HTML or PPTX build, and audits for AI slop and citation accuracy.",
+      "version": "0.1.0",
+      "source": "./",
+      "author": {"name": "Trần Quang Hưng", "url": "https://github.com/drtranquanghung91-vn"}
+    }
+  ]
+}
