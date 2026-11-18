@@ -211,7 +211,7 @@ built deck and both audit reports. Open `out/nova1-journal-club.html` in a brows
 to step through it, `L` for the laser, `C` to circle and `N` for notes.
 
 <p align="center">
-  <img src="assets/screenshots/kaplan-meier.jpg" width="49%" alt="Kaplan–Meier slide with animated curves">
+  <img src="assets/screenshots/kaplan-meier.jpg" width="49%" alt="Two Kaplan–Meier panels: recurrence-free and overall survival">
   <img src="assets/screenshots/trial-schema.jpg" width="49%" alt="Trial schema slide">
 </p>
 <p align="center">

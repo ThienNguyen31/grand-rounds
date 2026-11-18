@@ -23,7 +23,7 @@ Recurrence-free survival at 24 months was 79.1% with vaccine plus anti-PD-1 and 
 placebo plus anti-PD-1 (hazard ratio for recurrence or death, 0.62; 95% CI, 0.47 to 0.81).
 Recurrence or death occurred in 128 and 98 patients, respectively (Fig. 2).
 
-Overall survival data were immature (hazard ratio for death, 0.81; 95% CI, 0.52 to 1.27).
+Overall survival data were immature (hazard ratio for death, 0.81; 95% CI, 0.52 to 1.27). Death occurred in 69 and 39 patients, respectively; overall survival at 24 months was 89.1% and 86.7% (Fig. 3).
 
 ## Safety (p. 6, Table 3)
 

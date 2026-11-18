@@ -4,7 +4,7 @@ Result: PASS (0 blocking, 1 advisory)
 ## Scripts
 
 ```
-# check_claims: dom.html, 7 slides, 14 claims
+# check_claims: dom.html, 7 slides, 16 claims
 No findings.
 
 # phi_scan: nova1-journal-club.html
@@ -22,8 +22,9 @@ No findings.
 
 ## Read against the source
 Every claim in `evidence/claims.json` was compared with `sources/nova1-fictional-report.md`
-at its locator: values, endpoint (RFS), population (ITT), time point (24 months) and the
-OS wording ("immature", CI crossing 1) match.
+at its locator: values, end points (RFS, OS), population (ITT), time point (24 months).
+The overall-survival panel is labelled "immature" and its title wording ("still immature")
+matches a hazard ratio whose confidence interval crosses 1.
 
 ## Not checked
 - Nothing.

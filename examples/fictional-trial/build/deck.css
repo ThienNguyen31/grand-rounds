@@ -21,13 +21,17 @@
 .armA .c-big{color:var(--int)}.armB .c-big{color:var(--ctl)}
 .c-mid{font-size:32px}.c-sm{font-size:20px;color:var(--muted);margin-top:6px}
 
-/* efficacy */
-.km-cols{grid-template-columns:900px 1fr;align-items:center}
-.km-side .pair{font-size:72px;font-weight:700;white-space:nowrap;line-height:1}
-.km-side .pair .a{color:var(--int)}.km-side .pair .b{color:var(--ctl)}
-.km-side .pair i{font-size:28px;color:var(--faint);font-style:normal;font-weight:400;margin:0 14px}
-.km-side .lbl{font-size:24px;color:var(--muted);margin:10px 0 36px}
-.km-side .hr{font-size:32px;color:var(--ink2)}.km-side .hr b{color:var(--ink)}
+/* efficacy: two Kaplan-Meier panels */
+.km-pair{display:grid;grid-template-columns:1fr 1fr;gap:60px}
+.kmh{display:flex;justify-content:space-between;align-items:flex-end;gap:16px}
+.kmh .ep{font-size:28px;font-weight:700;color:var(--ink)}
+.kmh .ep span{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:8px;background:var(--primary-l);color:var(--primary);margin-right:12px;font-size:24px}
+.kmh .ep em{font-style:normal;font-weight:400;font-size:22px;color:var(--muted);margin-left:8px}
+.kmh .pair{font-size:44px;font-weight:700;white-space:nowrap;line-height:1}
+.kmh .pair .a{color:var(--int)}.kmh .pair .b{color:var(--ctl)}
+.kmh .pair i{font-size:22px;color:var(--faint);font-style:normal;font-weight:400;margin:0 10px}
+.hrl{font-size:22px;color:var(--ink2);margin:10px 0 6px}
+.hrl b{color:var(--ink)}
 
 /* safety */
 #dumb{width:100%;height:auto;display:block}

@@ -139,7 +139,7 @@
   {
    "id": "c10",
    "slide": 5,
-   "text": "Numbers at risk shown under the curve (from the trial's Fig. 2)",
+   "text": "Numbers at risk under the RFS curve (Fig. 2)",
    "values": [
     "522",
     "499",
@@ -224,6 +224,48 @@
    "locator": "p. 4, Results",
    "quote": "Of 1204 patients who underwent screening, 342 were not randomised (insufficient tumour tissue, 201; not disease-free, 88; consent withdrawn, 53).",
    "kind": "observed",
+   "status": "verified-fulltext"
+  },
+  {
+   "id": "c15",
+   "slide": 5,
+   "text": "Overall survival at 24 months, deaths and HR",
+   "values": [
+    "24 months",
+    "89.1%",
+    "86.7%",
+    "69",
+    "39",
+    "0.81",
+    "0.52",
+    "1.27"
+   ],
+   "source": "nova1",
+   "locator": "p. 4, Results; Fig. 3",
+   "quote": "Overall survival data were immature (hazard ratio for death, 0.81; 95% CI, 0.52 to 1.27). Death occurred in 69 and 39 patients, respectively; overall survival at 24 months was 89.1% and 86.7% (Fig. 3).",
+   "kind": "observed",
+   "status": "verified-fulltext"
+  },
+  {
+   "id": "c16",
+   "slide": 5,
+   "text": "Numbers at risk under the OS curve (Fig. 3)",
+   "values": [
+    "559",
+    "543",
+    "527",
+    "346",
+    "175",
+    "277",
+    "267",
+    "258",
+    "169",
+    "77"
+   ],
+   "source": "nova1",
+   "locator": "Fig. 3, numbers at risk",
+   "derivation": "read from figure table",
+   "kind": "derived",
    "status": "verified-fulltext"
   }
  ]

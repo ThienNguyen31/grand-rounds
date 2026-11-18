@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 640" font-family="Arial, sans-serif">
+<path d="M120.0 40.0H126.0V41.4H138.0V42.8H150.0V44.2H162.0V45.6H174.1V47.0H186.3V48.4H198.5V49.8H210.7V51.1H223.0V52.5H235.3V53.9H247.7V55.3H260.1V56.7H272.6V58.1H285.1V59.5H297.6V60.9H310.2V62.3H322.8V63.7H335.5V65.1H348.3V66.5H361.1V67.9H373.9V69.3H386.8V70.7H399.7V72.1H412.7V73.4H425.7V74.8H438.8V76.2H451.9V77.6H465.1V79.0H478.3V80.4H491.6V81.8H504.9V83.3H518.3V84.8H531.7V86.3H545.2V87.9H558.8V89.6H572.4V91.3H599.7V93.3H613.5V95.3H669.1V98.2H829.2" fill="none" stroke="#56677F" stroke-width="4"/>
+<line x1="492.5" x2="492.5" y1="75.8" y2="87.8" stroke="#56677F" stroke-width="2"/>
+<line x1="512.5" x2="512.5" y1="77.3" y2="89.3" stroke="#56677F" stroke-width="2"/>
+<line x1="550.0" x2="550.0" y1="81.9" y2="93.9" stroke="#56677F" stroke-width="2"/>
+<line x1="574.9" x2="574.9" y1="85.3" y2="97.3" stroke="#56677F" stroke-width="2"/>
+<line x1="594.3" x2="594.3" y1="85.3" y2="97.3" stroke="#56677F" stroke-width="2"/>
+<line x1="618.6" x2="618.6" y1="89.3" y2="101.3" stroke="#56677F" stroke-width="2"/>
+<line x1="634.0" x2="634.0" y1="89.3" y2="101.3" stroke="#56677F" stroke-width="2"/>
+<line x1="652.8" x2="652.8" y1="89.3" y2="101.3" stroke="#56677F" stroke-width="2"/>
+<line x1="680.6" x2="680.6" y1="92.2" y2="104.2" stroke="#56677F" stroke-width="2"/>
+<line x1="712.5" x2="712.5" y1="92.2" y2="104.2" stroke="#56677F" stroke-width="2"/>
+<line x1="736.6" x2="736.6" y1="92.2" y2="104.2" stroke="#56677F" stroke-width="2"/>
+<line x1="749.2" x2="749.2" y1="92.2" y2="104.2" stroke="#56677F" stroke-width="2"/>
+<line x1="787.3" x2="787.3" y1="92.2" y2="104.2" stroke="#56677F" stroke-width="2"/>
+<line x1="822.1" x2="822.1" y1="92.2" y2="104.2" stroke="#56677F" stroke-width="2"/>
+<line x1="843.7" x2="843.7" y1="92.2" y2="104.2" stroke="#56677F" stroke-width="2"/>
+<text x="839.4" y="136.2" font-size="21" font-weight="700" fill="#56677F" text-anchor="end">Placebo + anti-PD-1</text>
+<path d="M120.0 40.0H123.7V40.7H131.2V41.4H138.7V42.1H146.1V42.8H153.6V43.5H161.2V44.2H168.7V44.9H176.2V45.6H183.8V46.3H191.3V47.0H198.9V47.7H206.5V48.3H214.1V49.0H221.7V49.7H229.4V50.4H237.0V51.1H244.7V51.8H252.4V52.5H260.0V53.2H267.7V53.9H275.5V54.6H283.2V55.3H290.9V56.0H298.7V56.7H306.5V57.4H314.3V58.1H322.1V58.8H329.9V59.5H337.7V60.2H345.5V60.9H353.4V61.6H361.3V62.3H369.2V63.0H377.1V63.7H385.0V64.3H392.9V65.0H400.9V65.7H408.8V66.4H416.8V67.1H424.8V67.8H432.8V68.5H440.8V69.2H448.8V69.9H456.9V70.6H464.9V71.3H473.0V72.0H481.1V72.7H489.2V73.4H497.4V74.1H505.5V74.8H513.7V75.6H521.8V76.3H530.0V77.1H546.4V77.9H554.7V78.8H571.2V79.7H579.5V80.6H587.8V81.5H596.1V82.5H612.8V83.5H621.1V84.6H629.5V85.6H637.9V86.7H646.3V87.9H663.2V89.1H671.7V90.4H680.1V91.8H697.2V93.3H705.7V94.9H829.2" fill="none" stroke="#C8372D" stroke-width="4"/>
+<line x1="490.2" x2="490.2" y1="67.4" y2="79.4" stroke="#C8372D" stroke-width="2"/>
+<line x1="516.1" x2="516.1" y1="69.6" y2="81.6" stroke="#C8372D" stroke-width="2"/>
+<line x1="542.0" x2="542.0" y1="71.1" y2="83.1" stroke="#C8372D" stroke-width="2"/>
+<line x1="565.6" x2="565.6" y1="72.8" y2="84.8" stroke="#C8372D" stroke-width="2"/>
+<line x1="592.4" x2="592.4" y1="75.5" y2="87.5" stroke="#C8372D" stroke-width="2"/>
+<line x1="629.0" x2="629.0" y1="78.6" y2="90.6" stroke="#C8372D" stroke-width="2"/>
+<line x1="656.7" x2="656.7" y1="81.9" y2="93.9" stroke="#C8372D" stroke-width="2"/>
+<line x1="679.6" x2="679.6" y1="84.4" y2="96.4" stroke="#C8372D" stroke-width="2"/>
+<line x1="706.2" x2="706.2" y1="88.9" y2="100.9" stroke="#C8372D" stroke-width="2"/>
+<line x1="731.0" x2="731.0" y1="88.9" y2="100.9" stroke="#C8372D" stroke-width="2"/>
+<line x1="758.8" x2="758.8" y1="88.9" y2="100.9" stroke="#C8372D" stroke-width="2"/>
+<line x1="785.9" x2="785.9" y1="88.9" y2="100.9" stroke="#C8372D" stroke-width="2"/>
+<line x1="808.5" x2="808.5" y1="88.9" y2="100.9" stroke="#C8372D" stroke-width="2"/>
+<line x1="831.7" x2="831.7" y1="88.9" y2="100.9" stroke="#C8372D" stroke-width="2"/>
+<line x1="859.4" x2="859.4" y1="88.9" y2="100.9" stroke="#C8372D" stroke-width="2"/>
+<text x="284.4" y="37.3" font-size="21" font-weight="700" fill="#C8372D">Vaccine + anti-PD-1</text>
+</svg>
