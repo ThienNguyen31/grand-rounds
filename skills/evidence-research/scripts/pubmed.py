@@ -30,8 +30,8 @@ if hasattr(sys.stdout, "reconfigure"):  # Windows consoles default to cp1252
 EUTILS = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/"
 EPMC = "https://www.ebi.ac.uk/europepmc/webservices/rest/"
 CTGOV = "https://clinicaltrials.gov/api/v2/studies/"
-TOOL = "medslides"
-UA = "medslides/0.1 (+https://github.com/drtranquanghung91-vn/medical-presentation-create)"
+TOOL = "grand-rounds"
+UA = "grand-rounds/0.1 (+https://github.com/drtranquanghung91-vn/grand-rounds)"
 _last_ncbi = 0.0
 
 

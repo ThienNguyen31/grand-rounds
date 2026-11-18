@@ -1,4 +1,4 @@
-"""Unit tests for the MedSlides scripts. Run from the repo root:
+"""Unit tests for the Grand Rounds scripts. Run from the repo root:
 
     python -m unittest discover -s tests/unit -v
 

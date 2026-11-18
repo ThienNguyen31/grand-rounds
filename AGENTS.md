@@ -1,4 +1,4 @@
-# Contributing to MedSlides (for humans and agents)
+# Contributing to Grand Rounds (for humans and agents)
 
 ## Skills
 

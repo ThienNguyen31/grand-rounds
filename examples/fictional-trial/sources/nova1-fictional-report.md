@@ -1,6 +1,6 @@
 # NOVA-1 trial report (FICTIONAL)
 
-> Everything in this file is invented for the MedSlides demonstration deck. NOVA-1 does not
+> Everything in this file is invented for the Grand Rounds demonstration deck. NOVA-1 does not
 > exist. The text plays the role of a published paper so that every number on the demo
 > slides can be traced to a quote, as it would be with a real source.
 

@@ -15,4 +15,4 @@
 - Patient data: none
 - Open items: none
 
-> NOVA-1 is fictional. This folder shows the files each MedSlides stage produces.
+> NOVA-1 is fictional. This folder shows the files each Grand Rounds stage produces.

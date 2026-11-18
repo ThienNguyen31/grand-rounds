@@ -1,6 +1,6 @@
 # Example: NOVA-1 journal club (fictional)
 
-A complete MedSlides run on an invented trial. NOVA-1 does not exist; its "paper" is
+A complete Grand Rounds run on an invented trial. NOVA-1 does not exist; its "paper" is
 `sources/nova1-fictional-report.md`. Everything else is what the pipeline produces for a
 real talk.
 

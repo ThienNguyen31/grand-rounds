@@ -1,6 +1,6 @@
 {
-  "name": "medslides",
-  "displayName": "MedSlides",
+  "name": "grand-rounds",
+  "displayName": "Grand Rounds",
   "version": "0.1.0",
   "description": "Evidence-first medical slide decks: interview, plan, PubMed research, figures, HTML or PPTX, and audits for AI slop and citations.",
   "logo": "assets/logo.png",
@@ -8,7 +8,7 @@
   "category": "Productivity",
   "keywords": ["medical", "presentation", "slides", "journal-club", "evidence", "pubmed", "pptx", "html"],
   "author": {"name": "Trần Quang Hưng", "url": "https://github.com/drtranquanghung91-vn"},
-  "homepage": "https://github.com/drtranquanghung91-vn/medical-presentation-create",
-  "repository": "https://github.com/drtranquanghung91-vn/medical-presentation-create",
+  "homepage": "https://github.com/drtranquanghung91-vn/grand-rounds",
+  "repository": "https://github.com/drtranquanghung91-vn/grand-rounds",
   "license": "MIT"
 }

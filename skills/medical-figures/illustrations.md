@@ -68,7 +68,7 @@ size:
 
 Servier sequences (the cardiac cycle in four drawings, for example) make good motion
 graphics: show them side by side and highlight each step in turn with a CSS loop
-(see the heart-anatomy example in the MedSlides repository).
+(see the heart-anatomy example in the Grand Rounds repository).
 
 ## Rules
 

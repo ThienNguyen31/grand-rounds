@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="assets/logo.png" width="96" alt="MedSlides logo">
+  <img src="assets/logo.png" width="96" alt="Grand Rounds logo">
 </p>
 
-<h1 align="center">MedSlides</h1>
+<h1 align="center">Grand Rounds</h1>
 
 <p align="center">
   <b>Evidence-first medical presentations, built by your coding agent.</b><br>
@@ -42,7 +42,7 @@ within minutes. It is also usually wrong in ways that matter in front of a medic
   printed on the slide ("▸ click for next"), notes about how a figure was made ("original
   figure, recoloured").
 
-MedSlides turns slide-making into a method with gates, in the spirit of
+Grand Rounds turns slide-making into a method with gates, in the spirit of
 [Superpowers](https://github.com/obra/superpowers), and starts with a structured interview
 inspired by Matt Pocock's [grilling](https://github.com/mattpocock/skills) skill.
 
@@ -143,11 +143,11 @@ my-talk/
 ### Claude Code
 
 ```text
-/plugin marketplace add drtranquanghung91-vn/medical-presentation-create
-/plugin install medslides@medslides
+/plugin marketplace add drtranquanghung91-vn/grand-rounds
+/plugin install grand-rounds@grand-rounds
 ```
 
-Or for one session from a clone: `claude --plugin-dir path/to/medical-presentation-create`.
+Or for one session from a clone: `claude --plugin-dir path/to/grand-rounds`.
 
 ### Codex
 
@@ -157,8 +157,8 @@ file (`.agents/plugins/marketplace.json`). Each skill also has an `agents/openai
 plugin installer, copy or link the skills:
 
 ```bash
-git clone https://github.com/drtranquanghung91-vn/medical-presentation-create
-cp -r medical-presentation-create/skills/* ~/.agents/skills/
+git clone https://github.com/drtranquanghung91-vn/grand-rounds
+cp -r grand-rounds/skills/* ~/.agents/skills/
 ```
 
 For subagents, enable `[features] multi_agent = true` in `~/.codex/config.toml`.
@@ -166,7 +166,7 @@ For subagents, enable `[features] multi_agent = true` in `~/.codex/config.toml`.
 ### Antigravity
 
 ```bash
-agy plugin install https://github.com/drtranquanghung91-vn/medical-presentation-create
+agy plugin install https://github.com/drtranquanghung91-vn/grand-rounds
 ```
 
 Antigravity has no Skill tool, so the skills tell the model to read a skill's `SKILL.md`
@@ -260,7 +260,7 @@ to fix those failures, and the scenarios re-run with them loaded
 
 ## Acknowledgements
 
-MedSlides borrows ideas, not code, from these projects. Thank you to their authors.
+Grand Rounds borrows ideas, not code, from these projects. Thank you to their authors.
 
 - [obra/superpowers](https://github.com/obra/superpowers): skills as methodology, TDD for
   skills, multi-harness packaging
@@ -285,7 +285,7 @@ MedSlides borrows ideas, not code, from these projects. Thank you to their autho
 
 ## Disclaimer
 
-MedSlides helps prepare presentations. It does not give medical advice. The presenter is
+Grand Rounds helps prepare presentations. It does not give medical advice. The presenter is
 responsible for the content, for checking every claim against its source, for patient
 consent and de-identification, and for the right to reuse published figures.
 

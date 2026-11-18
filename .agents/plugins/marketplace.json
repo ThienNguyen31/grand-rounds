@@ -1,8 +1,8 @@
 {
-  "name": "medslides",
-  "interface": {"displayName": "MedSlides"},
+  "name": "grand-rounds",
+  "interface": {"displayName": "Grand Rounds"},
   "plugins": [
-    {"name": "medslides", "source": {"source": "url", "url": "./"},
+    {"name": "grand-rounds", "source": {"source": "url", "url": "./"},
      "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"}, "category": "Productivity"}
   ]
 }

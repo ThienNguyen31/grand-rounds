@@ -31,8 +31,8 @@ if hasattr(sys.stdout, "reconfigure"):  # Windows consoles default to cp1252
 
 TREE = "https://api.github.com/repos/duerrsimon/bioicons/git/trees/main?recursive=1"
 RAW = "https://raw.githubusercontent.com/duerrsimon/bioicons/main/"
-CACHE = Path(tempfile.gettempdir()) / "medslides-bioicons-tree.json"
-UA = {"User-Agent": "medslides/0.1 (+https://github.com/drtranquanghung91-vn/medical-presentation-create)"}
+CACHE = Path(tempfile.gettempdir()) / "grand-rounds-bioicons-tree.json"
+UA = {"User-Agent": "grand-rounds/0.1 (+https://github.com/drtranquanghung91-vn/grand-rounds)"}
 LICENCE_URL = {
     "cc-0": "https://creativecommons.org/publicdomain/zero/1.0/",
     "cc-by-3.0": "https://creativecommons.org/licenses/by/3.0/",

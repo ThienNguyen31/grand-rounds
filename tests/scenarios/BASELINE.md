@@ -1,6 +1,6 @@
 # Baseline behaviour (RED phase)
 
-Recorded 2026-11-18 with a general-purpose agent that had **no MedSlides skills loaded**.
+Recorded 2026-11-18 with a general-purpose agent that had **no Grand Rounds skills loaded**.
 Each scenario was run as a single-shot subagent with no tools. These are the failures the
 skills were written to fix. Re-run the same prompts with the plugin installed to check that
 they now pass (see `README.md` in this folder).

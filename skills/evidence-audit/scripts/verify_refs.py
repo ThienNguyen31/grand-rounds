@@ -27,7 +27,7 @@ from pathlib import Path
 if hasattr(sys.stdout, "reconfigure"):  # Windows consoles default to cp1252
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-UA = "medslides/0.1 (+https://github.com/drtranquanghung91-vn/medical-presentation-create)"
+UA = "grand-rounds/0.1 (+https://github.com/drtranquanghung91-vn/grand-rounds)"
 
 
 def _get(url: str) -> bytes:
@@ -39,7 +39,7 @@ def _get(url: str) -> bytes:
 def fetch_pubmed(pmid: str) -> dict | None:
     time.sleep(0.34)
     url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?" + urllib.parse.urlencode(
-        {"db": "pubmed", "id": pmid, "retmode": "json", "tool": "medslides"})
+        {"db": "pubmed", "id": pmid, "retmode": "json", "tool": "grand-rounds"})
     res = json.loads(_get(url)).get("result", {})
     s = res.get(str(pmid))
     if not s or "error" in s:
