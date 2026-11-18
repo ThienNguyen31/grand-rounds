@@ -42,7 +42,7 @@ in inches, to move the placeholder where the template's own slides put it; `scan
 |------|--------|
 | `title`, `closing` | `title`, `subtitle`, `presenter` |
 | `bullets` | `title`, `bullets`: strings or `{"text", "level", "bold", "color"}` |
-| `figure` | `title`, `image` (PNG/JPG), `alt`, `credit` |
+| `figure` | `title`, `image` (PNG/JPG), `alt`, `credit`; optional `labels` (`[{"text", "at": [x, y], "side"}]`, as in `label_figure.py`), `margin`, `label_pt` |
 | `figure-text` | `title`, `image`, `alt`, `credit`, `bullets`, `split` (0–1, image share) |
 | `big-number` | `title`, `numbers`: `[{"value", "label", "color"}]` (1–3), optional `bullets` |
 | `table` | `title`, `columns`, `rows`, optional `col_widths` |

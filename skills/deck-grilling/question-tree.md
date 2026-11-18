@@ -52,7 +52,7 @@ for every question, and give the reason in one clause.
   recoloured and animated (medical-figures). Rebuild from numbers only when there is no PDF
   or the figure is raster and unreadable. Flag reuse rights if the talk will be recorded.
 - Motion graphics: none · subtle reveals · explanatory mechanism animation (HTML only)
-- Medical illustrations: licensed libraries only (Servier, Bioicons, NIH BioArt) or the user's own?
+- Medical illustrations: licensed libraries (Servier Medical Art first), AI-generated through the user's own ChatGPT or Gemini account (anatomy checked before use), or the user's own images? Recommend Servier for standard anatomy and AI for views no library has.
 
 ### Template branch (when a template is supplied)
 - Use its title and closing layouts as-is? Keep its logo (check the event allows it)?

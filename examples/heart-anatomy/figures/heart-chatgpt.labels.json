@@ -1,0 +1,22 @@
+{
+  "image": "ai/heart-chatgpt.jpg",
+  "crop": [0.25, 0, 0.75, 1],
+  "max_width": 1000, "format": "jpeg", "quality": 86,
+  "margin": [0.55, 0.62], "stagger": 0.06, "whiten": 228,
+  "labels": [
+    {"text": "Superior vena cava", "at": [0.23, 0.20], "side": "left"},
+    {"text": "Right atrium", "at": [0.25, 0.42], "side": "left"},
+    {"text": "Pulmonary valve", "at": [0.42, 0.47], "side": "left"},
+    {"text": "Tricuspid valve", "at": [0.28, 0.60], "side": "left"},
+    {"text": "Right ventricle", "at": [0.33, 0.76], "side": "left"},
+    {"text": "Inferior vena cava", "at": [0.20, 0.90], "side": "left"},
+    {"text": "Aortic arch", "at": [0.55, 0.12], "side": "right"},
+    {"text": "Pulmonary artery", "at": [0.62, 0.24], "side": "right"},
+    {"text": "Pulmonary veins", "at": [0.88, 0.36], "side": "right"},
+    {"text": "Left atrium", "at": [0.70, 0.38], "side": "right"},
+    {"text": "Aortic valve", "at": [0.52, 0.46], "side": "right"},
+    {"text": "Mitral valve", "at": [0.65, 0.57], "side": "right"},
+    {"text": "Interventricular septum", "at": [0.46, 0.72], "side": "right"},
+    {"text": "Left ventricle", "at": [0.66, 0.80], "side": "right"}
+  ]
+}

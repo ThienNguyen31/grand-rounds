@@ -22,6 +22,9 @@ import zipfile
 from collections import Counter
 from pathlib import Path
 
+if hasattr(sys.stdout, "reconfigure"):  # Windows consoles default to cp1252
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 EMU_PER_IN = 914400
 A = "http://schemas.openxmlformats.org/drawingml/2006/main"
 

@@ -24,6 +24,9 @@ import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 
+if hasattr(sys.stdout, "reconfigure"):  # Windows consoles default to cp1252
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 EUTILS = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/"
 EPMC = "https://www.ebi.ac.uk/europepmc/webservices/rest/"
 CTGOV = "https://clinicaltrials.gov/api/v2/studies/"

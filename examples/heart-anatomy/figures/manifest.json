@@ -1,0 +1,16 @@
+{"figures": [
+  {"file": "servier/four-chambers.jpg → four-chambers.labelled.svg", "slide": 2, "kind": "illustration",
+   "source": "Servier Medical Art, kit 'SMART-Heart-physiology.pptx', slide 'The cardiac cycle', group 2",
+   "url": "https://smart.servier.com/", "licence": "CC BY 4.0",
+   "modifications": "exported from the vector group at 2400 px, converted to JPEG, labels added with label_figure.py"},
+  {"file": "servier/cardiac-cycle-1.jpg … cardiac-cycle-4.jpg", "slide": 3, "kind": "illustration",
+   "source": "Servier Medical Art, kit 'SMART-Heart-physiology.pptx', slide 'The cardiac cycle', groups 1–4",
+   "url": "https://smart.servier.com/", "licence": "CC BY 4.0",
+   "modifications": "exported from vector groups, converted to JPEG; shown in sequence with a CSS highlight loop"},
+  {"file": "ai/heart-chatgpt.jpg → heart-chatgpt.labelled.svg", "slide": 4, "kind": "ai-generated",
+   "tool": "ChatGPT Images (OpenAI), via the user's signed-in browser", "date": "2026-11-18",
+   "prompt": "Medical textbook illustration: frontal (coronal) section of the adult human heart, anterior view, showing all four chambers (right atrium, right ventricle, left atrium, left ventricle), the interventricular septum, tricuspid and mitral valves with chordae tendineae and papillary muscles, pulmonary and aortic valves, superior and inferior vena cava, pulmonary trunk with left and right pulmonary arteries, aortic arch with its three branches, and pulmonary veins. Anatomically accurate proportions: left ventricular wall clearly thicker than the right. Deoxygenated blood spaces tinted soft blue, oxygenated blood spaces soft red, myocardium muted pink-red. Clean modern flat vector style with subtle shading, crisp outlines, like a high-quality medical education slide. Pure white background. Landscape 16:9 canvas, heart centered and occupying about 60% of the width, with generous empty white margins on the left and right for labels to be added later. Absolutely no text, no labels, no letters, no numbers, no arrows, no watermark.",
+   "checked_against": "Servier Medical Art heart illustrations (same kit)",
+   "issues": "the vessels on the viewer's left are drawn entering the right atrium; the right pulmonary veins drain to the left atrium. Not labelled; mentioned in the speaker notes.",
+   "licence": "output owned by the user under OpenAI's terms; released with this repository under MIT"}
+]}

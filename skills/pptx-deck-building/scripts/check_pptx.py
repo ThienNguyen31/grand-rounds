@@ -17,6 +17,9 @@ import subprocess
 import sys
 from pathlib import Path
 
+if hasattr(sys.stdout, "reconfigure"):  # Windows consoles default to cp1252
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 try:
     from pptx import Presentation
     from pptx.util import Emu
@@ -32,11 +35,12 @@ def est_overflow(shape) -> float:
     w_pt = max(1, (shape.width - (tf.margin_left or 0) - (tf.margin_right or 0)) / EMU_PER_PT)
     h_pt = max(1, (shape.height - (tf.margin_top or 0) - (tf.margin_bottom or 0)) / EMU_PER_PT)
     total = 0.0
+    nowrap = tf.word_wrap is False
     for p in tf.paragraphs:
         size = next((r.font.size.pt for r in p.runs if r.font.size), 18.0)
         chars = sum(len(r.text) for r in p.runs) or 1
         per_line = max(1, w_pt / (size * 0.5))  # average glyph ≈ 0.5 em
-        lines = -(-chars // per_line)
+        lines = 1 if nowrap else -(-chars // per_line)
         total += lines * size * 1.2 + (p.space_after.pt if p.space_after else 0)
     return total / h_pt
 

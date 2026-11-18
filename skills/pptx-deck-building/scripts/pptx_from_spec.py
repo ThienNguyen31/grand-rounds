@@ -18,6 +18,9 @@ import json
 import sys
 from pathlib import Path
 
+if hasattr(sys.stdout, "reconfigure"):  # Windows consoles default to cp1252
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 try:
     from lxml import etree  # python-pptx depends on lxml
     from pptx import Presentation
@@ -238,10 +241,64 @@ class Builder:
         x, y, w, h = self.content_box(self.title(s))
         self._clear_body_placeholders()
         credit_h = Inches(0.35) if s.get("credit") else 0
-        self.image(s["image"], x, y, w, h - credit_h, s.get("alt", ""))
+        if s.get("labels"):
+            self.labelled_image(s, x, y, w, h - credit_h)
+        else:
+            self.image(s["image"], x, y, w, h - credit_h, s.get("alt", ""))
         if s.get("credit"):
             self.textbox(x, y + h - credit_h, w, credit_h, s["credit"], self.theme["type_pt"]["small"], "muted",
                          italic=True, name="Credit")
+
+    def labelled_image(self, s, x, y, w, h):
+        """Picture in the middle, editable labels in columns either side, leader lines and dots.
+        Same `labels` format as medical-figures/scripts/label_figure.py ("at" = fractions of the image)."""
+        from PIL import Image
+        with Image.open(self.base / s["image"]) as im:
+            iw, ih = im.size
+        ml, mr = s.get("margin", [0.5, 0.5])
+        scale = min(w / ((ml + 1 + mr) * iw), h / ih)
+        pw, ph = int(iw * scale), int(ih * scale)
+        x0 = x + (w - int((ml + 1 + mr) * pw)) // 2
+        px0 = x0 + int(ml * pw)
+        pic = self.cur.shapes.add_picture(str(self.base / s["image"]), px0, y, pw, ph)
+        pic._element.nvPicPr.cNvPr.set("descr", s.get("alt", Path(s["image"]).stem))
+        size = s.get("label_pt", self.theme["type_pt"]["small"] + 2)
+        line_h = Pt(size * 1.55)
+        for side in ("left", "right"):
+            items = [lab for lab in s["labels"] if lab.get("side", "left") == side]
+            if not items:
+                continue
+            ys = [y + int(lab["at"][1] * ph) for lab in items]
+            order = sorted(range(len(ys)), key=lambda i: ys[i])
+            v = [ys[i] for i in order]
+            for i in range(len(v)):  # spread apart, then pull back inside the picture height
+                v[i] = max(v[i], y + line_h // 2 if i == 0 else v[i - 1] + line_h)
+            for i in range(len(v) - 1, -1, -1):
+                v[i] = min(v[i], y + ph - line_h // 2 if i == len(v) - 1 else v[i + 1] - line_h)
+            placed = [0] * len(ys)
+            for k, i in enumerate(order):
+                placed[i] = v[k]
+            col_w = int((ml if side == "left" else mr) * pw) - Inches(0.15)
+            for lab, ly in zip(items, placed):
+                tx = px0 - Inches(0.15) - col_w if side == "left" else px0 + pw + Inches(0.15)
+                tb = self.textbox(tx, ly - line_h // 2, col_w, line_h, lab["text"], size, "ink",
+                                  align=PP_ALIGN.RIGHT if side == "left" else PP_ALIGN.LEFT,
+                                  anchor=MSO_ANCHOR.MIDDLE, name=f"Label {lab['text']}")
+                tb.text_frame.word_wrap = False
+                tb.text_frame.margin_top = tb.text_frame.margin_bottom = Emu(0)
+                ax = px0 - Inches(0.08) if side == "left" else px0 + pw + Inches(0.08)
+                tx_pt, ty_pt = px0 + int(lab["at"][0] * pw), y + int(lab["at"][1] * ph)
+                ln = self.cur.shapes.add_connector(MSO_CONNECTOR.STRAIGHT, ax, ly, tx_pt, ty_pt)
+                ln.line.color.rgb = rgb("#5F6B78")
+                ln.line.width = Pt(1)
+                ln.name = f"Leader {lab['text']}"
+                r = Pt(4)
+                d = self.cur.shapes.add_shape(MSO_SHAPE.OVAL, tx_pt - r, ty_pt - r, 2 * r, 2 * r)
+                d.fill.solid()
+                d.fill.fore_color.rgb = rgb("#1B2430")
+                d.line.color.rgb = rgb("#FFFFFF")
+                d.line.width = Pt(1)
+                d.name = f"Dot {lab['text']}"
 
     def s_figure_text(self, s, idx):
         self.cur = self.prs.slides.add_slide(self.layout("content", s.get("layout")))

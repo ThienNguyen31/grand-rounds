@@ -239,7 +239,11 @@ class TestPptx(unittest.TestCase):
              "edges": [{"from": "a", "to": "b"}]},
             {"type": "chart", "title": "AEs", "chart": "bar", "categories": ["x", "y"],
              "series": [{"name": "A", "values": [1.5, 2.5], "color": "intervention"}], "notes": "n"},
-            {"type": "table", "title": "T", "columns": ["a", "b"], "rows": [["1", "2"]], "notes": "n"}]}
+            {"type": "table", "title": "T", "columns": ["a", "b"], "rows": [["1", "2"]], "notes": "n"},
+            {"type": "figure", "title": "Labelled", "image": "pic.png", "notes": "n",
+             "labels": [{"text": "Left", "at": [0.2, 0.3], "side": "left"}, {"text": "Right", "at": [0.8, 0.6], "side": "right"}]}]}
+        from PIL import Image
+        Image.new("RGB", (400, 300), "white").save(tmp / "pic.png")
         (tmp / "deck.json").write_text(json.dumps(spec), encoding="utf-8")
         build = load("pptx-deck-building/scripts/pptx_from_spec.py", "pptx_from_spec")
         self.assertEqual(build.main([str(tmp / "deck.json"), str(tmp / "o.pptx")]), 0)
@@ -247,7 +251,7 @@ class TestPptx(unittest.TestCase):
         self.assertEqual(check.main([str(tmp / "o.pptx")]), 0)
         scan = load("template-matching/scripts/scan_template.py", "scan_template")
         res = scan.scan(tmp / "o.pptx", tmp / "theme")
-        self.assertEqual(len(res["slides"]), 5)
+        self.assertEqual(len(res["slides"]), 6)
         self.assertTrue((tmp / "theme" / "scan.json").exists())
 
 
@@ -310,3 +314,41 @@ class TestComposeDeck(unittest.TestCase):
         r = build.build(out, tmp / "out.html")
         self.assertEqual(r["missing"], [])
         self.assertIn("--primary:#123456", (tmp / "out.html").read_text(encoding="utf-8"))
+
+
+@unittest.skipUnless(has("PIL"), "Pillow not installed")
+class TestLabelFigure(unittest.TestCase):
+    def setUp(self):
+        self.mod = load("medical-figures/scripts/label_figure.py", "label_figure")
+
+    def test_spread_keeps_gap_and_bounds(self):
+        ys = self.mod.spread([100, 101, 102, 500], gap=30, lo=20, hi=480)
+        s = sorted(ys)
+        self.assertTrue(all(b - a >= 29.9 for a, b in zip(s, s[1:])))
+        self.assertGreaterEqual(min(ys), 20)
+        self.assertLessEqual(max(ys), 480)
+
+    def test_build_svg_with_labels(self):
+        from PIL import Image
+        tmp = Path(tempfile.mkdtemp())
+        Image.new("RGB", (400, 300), (250, 250, 250)).save(tmp / "a.png")
+        spec = {"image": "a.png", "whiten": 240, "stagger": 0.1, "labels": [
+            {"text": "Right atrium", "at": [0.2, 0.4], "side": "left"},
+            {"text": "Left atrium & more", "at": [0.8, 0.4], "side": "right"}]}
+        svg = self.mod.build(spec, tmp)
+        self.assertIn("data:image/jpeg;base64,", svg)
+        self.assertIn("Left atrium &amp; more", svg)
+        self.assertEqual(svg.count("<circle"), 2)
+        self.assertIn('class="a-in"', svg)
+
+
+class TestLintCredits(unittest.TestCase):
+    def test_ai_disclosure_in_credit_is_not_slop(self):
+        mod = load("slop-audit/scripts/lint_slop.py", "lint_slop2")
+        tmp = Path(tempfile.mkdtemp()) / "d.html"
+        tmp.write_text('<section class="slide"><h2>Title</h2></section><section class="slide"><h2>Heart</h2>'
+                       '<div class="credit">Illustration: generated with ChatGPT, anatomy checked</div></section>'
+                       '<section class="slide"><h2>Heart</h2><p>Figure redrawn for clarity</p></section>', encoding="utf-8")
+        found = [(f["id"], f["slide"]) for f in mod.lint_html(tmp, "en", None)]
+        self.assertNotIn(("S03", 2), found)
+        self.assertIn(("S03", 3), found)

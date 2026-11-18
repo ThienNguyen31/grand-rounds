@@ -1,0 +1,17 @@
+{
+  "image": "servier/four-chambers.jpg",
+  "max_width": 1100, "format": "jpeg", "quality": 86,
+  "margin": [0.62, 0.78], "stagger": 0.08,
+  "labels": [
+    {"text": "Superior vena cava", "at": [0.20, 0.20], "side": "left"},
+    {"text": "Right atrium", "at": [0.22, 0.50], "side": "left"},
+    {"text": "Right ventricle", "at": [0.42, 0.78], "side": "left"},
+    {"text": "Inferior vena cava", "at": [0.15, 0.93], "side": "left"},
+    {"text": "Aorta", "at": [0.47, 0.07], "side": "right"},
+    {"text": "Pulmonary artery", "at": [0.66, 0.20], "side": "right"},
+    {"text": "Pulmonary vein", "at": [0.77, 0.34], "side": "right"},
+    {"text": "Left atrium", "at": [0.62, 0.45], "side": "right"},
+    {"text": "Interventricular septum", "at": [0.50, 0.62], "side": "right"},
+    {"text": "Left ventricle", "at": [0.70, 0.75], "side": "right"}
+  ]
+}

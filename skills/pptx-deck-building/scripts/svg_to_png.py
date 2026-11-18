@@ -11,6 +11,9 @@ import re
 import sys
 from pathlib import Path
 
+if hasattr(sys.stdout, "reconfigure"):  # Windows consoles default to cp1252
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__)

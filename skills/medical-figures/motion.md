@@ -82,7 +82,12 @@ Worked examples in `examples/`:
 | File | Shows |
 |------|-------|
 | `checkpoint-blockade.html` | PD-1/PD-L1 blockade in four stages, 16 s loop, captions and progress line |
-| `heart-chambers.html` | Four-chamber anatomy with labelled valves and vessels, blood flowing on the vessel centre lines, a 1 s cardiac cycle with atrioventricular valves closing in systole |
+
+
+A sequence of illustrations (Servier draws the cardiac cycle in four pictures) becomes
+motion without redrawing anything: place the pictures side by side and highlight each in
+turn with one keyframe loop and staggered negative delays (`animation-delay: -9s, -6s, -3s`
+for four steps in a 12 s loop). The audience reads the sequence as it plays.
 
 ## Labels on illustrations
 

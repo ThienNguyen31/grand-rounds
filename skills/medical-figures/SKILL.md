@@ -16,7 +16,8 @@ that keeps it exact:
 | A figure that exists in the source PDF (KM, forest plot, CONSORT) | **Lift the vectors**, recolour to the theme; never redraw a curve | `reuse-from-pdf.md` |
 | A diagram the paper describes but doesn't draw well (trial schema, flow, timeline, algorithm) | **Rebuild as SVG** from claims only | `diagrams.md` |
 | A comparison of numbers (rates, subgroup effects) | **Chart** from claims: dot/dumbbell, bars, forest | `diagrams.md` |
-| Anatomy, cells, molecules, devices | **Licensed library** (Servier Medical Art, Bioicons, NIH BioArt), or a **schematic drawn in SVG** with labels outside the structures | `illustrations.md`, `examples/heart-chambers.html` |
+| Anatomy, organs, cells, devices | **Servier Medical Art** at full resolution (CC BY 4.0), or an **AI-generated illustration** (ChatGPT, Gemini) checked against a reference; never hand-coded organs | `illustrations.md`, `ai-images.md` |
+| Labels on any picture | **Editable labels** in columns with leader lines, never baked into pixels | `scripts/label_figure.py` |
 | A mechanism or physiology that unfolds over time (binding, signalling, blood flow) | **Motion graphic** coded in SVG/CSS (HTML only): click-stepped or looping like a video; static step panels for PPTX | `motion.md`, `examples/checkpoint-blockade.html` |
 
 ## Rules
@@ -47,9 +48,12 @@ that keeps it exact:
 ```
 
 `kind` is one of `reused-vector`, `reused-raster`, `rebuilt`, `chart`, `illustration`,
-`animation`. A licence field that is empty or "unknown" is a finding for the audit.
+`ai-generated`, `animation`. AI-generated entries also record `tool`, `prompt`, `date`,
+`checked_against` and `issues` (`ai-images.md`). A licence field that is empty or "unknown" is a finding for the audit.
 
 ## Script
 
-`scripts/pdf_figures.py` (PyMuPDF). Run `--help`. Commands: `list`, `extract`, `raster`,
-`colors`, `split`.
+- `scripts/pdf_figures.py` (PyMuPDF): `list`, `extract`, `raster`, `colors`, `split`.
+- `scripts/label_figure.py` (Pillow): image + label spec → SVG with non-overlapping labels.
+
+Run each with `--help`.

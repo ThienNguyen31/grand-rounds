@@ -41,6 +41,8 @@
 ## Not slop
 
 - Elements of the user's template: header bars, logos, footers, page numbers.
-- A short source credit under a reused figure.
+- A short source credit under a reused figure, including the disclosure that an illustration
+  was AI-generated and who checked it ("Illustration: generated with ChatGPT, anatomy checked
+  against Servier Medical Art"). Put it in a credit or footer element (`.credit`, `data-cite`).
 - Speaker notes, however long.
 - Repeated layouts in a deliberate series (one slide per guideline change).

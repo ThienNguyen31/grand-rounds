@@ -24,6 +24,9 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
+if hasattr(sys.stdout, "reconfigure"):  # Windows consoles default to cp1252
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 UA = "medslides/0.1 (+https://github.com/drtranquanghung91-vn/medical-presentation-create)"
 
 

@@ -15,14 +15,14 @@
   <img alt="Claude Code" src="https://img.shields.io/badge/Claude%20Code-plugin-C8372D">
   <img alt="Codex" src="https://img.shields.io/badge/Codex-skills-56677F">
   <img alt="Antigravity" src="https://img.shields.io/badge/Antigravity-plugin-56677F">
-  <img alt="Tests" src="https://img.shields.io/badge/unit%20tests-21%20passing-2E7D32">
+  <img alt="Tests" src="https://img.shields.io/badge/unit%20tests-24%20passing-2E7D32">
 </p>
 
 <p align="center">
-  <img src="assets/screenshots/mechanism.gif" width="53%" alt="Looping motion graphic: PD-1/PD-L1 checkpoint blockade in four stages">
-  <img src="assets/screenshots/heart-anatomy.gif" width="45%" alt="Animated four-chamber heart with blood flow and valve motion">
+  <img src="assets/screenshots/mechanism.gif" width="49%" alt="Looping motion graphic: PD-1/PD-L1 checkpoint blockade in four stages">
+  <img src="assets/screenshots/cardiac-cycle.gif" width="49%" alt="Cardiac cycle: four Servier Medical Art drawings highlighted in turn">
 </p>
-<p align="center"><sub>Coded motion graphics, not videos: vector, a few kilobytes, editable, and played inside the slide.</sub></p>
+<p align="center"><sub>Motion inside the slide instead of a pasted video: a coded mechanism (left) and a sequence of licensed illustrations played as a loop (right).</sub></p>
 
 ---
 
@@ -92,7 +92,7 @@ my-talk/
 | `deck-grilling` | model | Interview in rounds of numbered questions, each with a recommended answer. Facts are looked up; decisions are asked. Output format and template are always asked. |
 | `deck-planning` | model | Storyline recipes (journal club, conference, lecture, guideline update, clinical case, M&M), assertion titles, visual grammar, time budget |
 | `evidence-research` | model | PubMed (MCP or bundled `pubmed.py`), Europe PMC full text, ClinicalTrials.gov; a claim ledger with locators and verbatim quotes |
-| `medical-figures` | model | Lift Kaplan–Meier curves and forest plots **as vectors** from the PDF and recolour them; rebuild CONSORT, PRISMA, trial schemas and timelines; anatomical schematics drawn in code; licensed illustrations; **looping motion graphics** for mechanisms and physiology |
+| `medical-figures` | model | Lift Kaplan–Meier curves and forest plots **as vectors** from the PDF and recolour them; rebuild CONSORT, PRISMA, trial schemas and timelines; **Servier Medical Art at full resolution** or **AI-generated illustrations** (ChatGPT, Gemini) with **editable labels**; looping motion graphics for mechanisms and physiology |
 | `template-matching` | model | Measure a hospital or congress .pptx (colours, fonts, layouts, title boxes, backgrounds) and reproduce it |
 | `html-deck-building` | model | One offline HTML file: 1920 × 1080 stage, fragments, speaker notes, smooth GPU-only motion, **laser pointer, circle and pen tools** |
 | `pptx-deck-building` | model | Editable PowerPoint inside your template: native shapes for diagrams, native charts, notes |
@@ -122,6 +122,12 @@ my-talk/
 - **Your template, measured.** `scan_template.py` reports the layouts and title positions
   that the template's own slides use, so the deck sits inside the template rather than
   imitating it.
+- **Beautiful illustrations, correct labels.** Standard anatomy comes from Servier Medical
+  Art (exported at full resolution from its vector PowerPoint kits). Anything a library
+  lacks can be generated with ChatGPT or Gemini through your own signed-in browser, with no
+  text in the pixels. The anatomy is then checked against a reference, and the labels are
+  laid out as editable text with leader lines (`label_figure.py`, or native text boxes in
+  PPTX).
 - **Motion graphics instead of videos.** A mechanism, a pathway or blood moving through the
   heart is coded as an SVG that loops inside the slide like a GIF. It stays sharp on any
   projector, weighs kilobytes, carries a caption per stage, and pauses on a poster frame
@@ -175,6 +181,8 @@ when it applies. Subagents use `invoke_subagent`.
 |------|---------|
 | Everything except the items below | Python 3.10+ (standard library only) |
 | Lifting figures from PDFs | `pip install pymupdf` |
+| Labels on illustrations | `pip install pillow` |
+| AI-generated illustrations | a browser tool (Playwright MCP, Claude in Chrome, Antigravity browser) signed in to your ChatGPT or Gemini account |
 | PPTX build and checks | `pip install python-pptx` |
 | HTML render check, SVG → PNG | `pip install playwright`, then `python -m playwright install chromium`, or use an installed Edge or Chrome |
 | PPTX renders for visual QA | PowerPoint (Windows) or LibreOffice |
@@ -208,12 +216,18 @@ to step through it, `L` for the laser, `C` to circle and `N` for notes.
   <img src="assets/screenshots/mechanism.jpg" width="49%" alt="Mechanism slide, poster frame">
 </p>
 
-[`examples/heart-anatomy/`](examples/heart-anatomy) is a teaching slide: a four-chamber heart
-drawn in code, with labelled valves and great vessels, blood flowing along the vessel centre
-lines and a cardiac cycle in which the atrioventricular valves close during systole.
+[`examples/heart-anatomy/`](examples/heart-anatomy) shows the illustration routes on a
+teaching topic:
+
+- a Servier Medical Art drawing with labels added as text;
+- the four Servier drawings of the cardiac cycle played as a loop;
+- an illustration generated with ChatGPT and checked against Servier. The check found that
+  the vessels on the left are drawn into the right atrium; that error is left unlabelled
+  and recorded in the manifest.
 
 <p align="center">
-  <img src="assets/screenshots/heart-anatomy.jpg" width="70%" alt="Heart anatomy teaching slide">
+  <img src="assets/screenshots/heart-servier-labelled.jpg" width="49%" alt="Servier Medical Art heart with editable labels">
+  <img src="assets/screenshots/heart-ai-labelled.jpg" width="49%" alt="AI-generated heart illustration with editable labels">
 </p>
 
 ## Repository layout
@@ -222,7 +236,7 @@ lines and a cardiac cycle in which the atrioventricular valves close during syst
 skills/                 one folder per skill: SKILL.md, references, scripts/, agents/openai.yaml
   medical-deck/roles/   subagent briefs for stages 4–7
 examples/fictional-trial/   an end-to-end journal-club run with every intermediate file
-examples/heart-anatomy/     a teaching slide with an animated anatomical illustration
+examples/heart-anatomy/     teaching slides: Servier and AI illustrations, labels, a cycle loop
 tests/unit/             tests for every script (python -m unittest discover -s tests/unit)
 tests/scenarios/        RED/GREEN behaviour scenarios for the skills
 docs/                   architecture and per-harness notes
@@ -275,4 +289,6 @@ consent and de-identification, and for the right to reuse published figures.
 ## Licence
 
 [MIT](LICENSE) © 2026 Trần Quang Hưng. The licence covers this repository's code and text.
-It does not extend to third-party figures or illustrations you add to your own decks.
+The Servier Medical Art images in the heart example are CC BY 4.0 (see [NOTICE](NOTICE.md)).
+The MIT licence does not extend to third-party figures or illustrations you add to your own
+decks.

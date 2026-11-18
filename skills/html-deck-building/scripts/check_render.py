@@ -22,6 +22,9 @@ import json
 import sys
 from pathlib import Path
 
+if hasattr(sys.stdout, "reconfigure"):  # Windows consoles default to cp1252
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 OVERFLOW_JS = r"""
 (() => {
   const st = document.getElementById('stage').getBoundingClientRect(), k = st.width / 1920;

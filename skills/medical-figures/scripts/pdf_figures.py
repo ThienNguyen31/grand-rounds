@@ -24,6 +24,9 @@ import sys
 from collections import Counter
 from pathlib import Path
 
+if hasattr(sys.stdout, "reconfigure"):  # Windows consoles default to cp1252
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 CAPTION = re.compile(r"^\s*(?:Figure|Fig\.|Table|Hình|Bảng|Panel)\s*\S*", re.I)
 
 

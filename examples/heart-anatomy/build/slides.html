@@ -1,25 +1,42 @@
 <section class="slide title" data-name="Title">
   <h1 class="a-in" style="--d:.1s">How blood moves through the four chambers of the heart</h1>
-  <div class="sub a-in" style="--d:.3s">Teaching example · a coded anatomical illustration with live blood flow</div>
+  <div class="sub a-in" style="--d:.3s">Teaching example · labelled illustrations and the cardiac cycle in motion</div>
   <div class="who a-in" style="--d:.5s">Presenter Name<span>Department of Physiology</span></div>
-  <aside class="notes">Example of a medical illustration drawn in code: crisp at any size, editable, and animated without a video file.</aside>
+  <aside class="notes">Three ways to illustrate: a licensed medical illustration with labels added as text, a sequence of illustrations played as a loop, and an AI-generated illustration checked against a reference.</aside>
 </section>
 
-<section class="slide" data-name="Chambers" data-cite="Schematic frontal section, not to scale.">
-  <h2 class="t a-in">The right heart pumps blood to the lungs; the left heart pumps it to the body</h2>
+<section class="slide" data-name="Chambers" data-cite="Illustration: Servier Medical Art (smart.servier.com), CC BY 4.0; labels added.">
+  <h2 class="t a-in">Venous blood fills the right heart; blood from the lungs fills the left heart</h2>
   <div class="body">
     <div class="anat">
-      <figure class="fig a-in" style="--d:.15s"><!--include: ../figures/heart.svg--></figure>
-      <div class="side">
-        <div class="key a-in" style="--d:.4s"><i style="background:#2F5E9E"></i>Deoxygenated blood</div>
-        <div class="key a-in" style="--d:.5s"><i style="background:#B3302B"></i>Oxygenated blood</div>
-        <ol class="flow a-in" style="--d:.7s">
-          <li>Venae cavae → right atrium → tricuspid valve → right ventricle → pulmonary artery</li>
-          <li>Pulmonary veins → left atrium → mitral valve → left ventricle → aorta</li>
-          <li>The left ventricular wall is the thickest: it pumps against systemic pressure</li>
-        </ol>
+      <figure class="fig a-in" style="--d:.15s"><!--include: ../figures/four-chambers.labelled.svg--></figure>
+      <div class="side a-in" style="--d:.6s">
+        <div class="key"><i style="background:#5B93C9"></i>Deoxygenated blood</div>
+        <div class="key"><i style="background:#E8533A"></i>Oxygenated blood</div>
       </div>
     </div>
   </div>
-  <aside class="notes">Follow the blue dots from the venae cavae through the right atrium and ventricle out to the lungs, then the red dots from the pulmonary veins through the left heart into the aorta. The chambers contract once a second and the atrioventricular valves close as the ventricles contract. Schematic: proportions are simplified.</aside>
+  <aside class="notes">Blue: the venae cavae return blood to the right atrium, which fills the right ventricle. Red: the pulmonary veins bring blood from the lungs to the left atrium, which fills the left ventricle. The interventricular septum separates the two ventricles.</aside>
+</section>
+
+<section class="slide" data-name="Cardiac cycle" data-cite="Illustrations: Servier Medical Art (smart.servier.com), CC BY 4.0.">
+  <h2 class="t a-in">Each heartbeat fills the ventricles first, then empties them into the great arteries</h2>
+  <div class="body">
+    <div class="cycle" data-poster="0.1">
+      <figure class="ph p1"><img src="../figures/servier/cardiac-cycle-1.jpg" alt="Blood returning to both atria"><figcaption><b>1</b>Blood returns to the atria</figcaption></figure>
+      <figure class="ph p2"><img src="../figures/servier/cardiac-cycle-2.jpg" alt="Atrioventricular valves open, ventricles filling"><figcaption><b>2</b>Valves open; the ventricles fill</figcaption></figure>
+      <figure class="ph p3"><img src="../figures/servier/cardiac-cycle-3.jpg" alt="Atria contract and complete ventricular filling"><figcaption><b>3</b>The atria contract and top up the ventricles</figcaption></figure>
+      <figure class="ph p4"><img src="../figures/servier/cardiac-cycle-4.jpg" alt="Ventricles contract and eject blood"><figcaption><b>4</b>The ventricles contract and eject blood</figcaption></figure>
+      <div class="track"><span></span></div>
+    </div>
+  </div>
+  <aside class="notes">The highlight moves through the four steps every 12 seconds. 1: blood returns to both atria. 2: the atrioventricular valves open and the ventricles fill. 3: atrial contraction completes ventricular filling. 4: the ventricles contract, the atrioventricular valves close, and blood is ejected into the pulmonary artery and the aorta.</aside>
+</section>
+
+<section class="slide" data-name="AI illustration" data-cite="Illustration: generated with ChatGPT (OpenAI), anatomy checked against Servier Medical Art; labels added.">
+  <h2 class="t a-in">The left ventricular wall is the thickest because it pumps against systemic pressure</h2>
+  <div class="body">
+    <figure class="fig ai a-in" style="--d:.15s"><!--include: ../figures/heart-chatgpt.labelled.svg--></figure>
+  </div>
+  <aside class="notes">Compare the thin right ventricular wall with the thick left ventricular wall and the septum. This illustration was generated with ChatGPT and then checked. One thing the check found: the vessels on the far left are drawn as if they joined the right atrium. The right pulmonary veins actually pass behind the heart to the left atrium, so they are not labelled here.</aside>
 </section>

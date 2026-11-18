@@ -1,25 +1,24 @@
-# Example: heart anatomy teaching slide
+# Example: heart anatomy teaching slides
 
-A medical illustration drawn in code rather than pasted as a picture or a video:
-`figures/heart.svg` is a schematic frontal section with the four chambers, the tricuspid and
-mitral valves with chordae and papillary muscles, the semilunar valves, the venae cavae,
-pulmonary trunk and arteries, aorta and pulmonary veins. The left ventricular wall is drawn
-thicker than the right.
+Three ways to put good medical illustrations on a slide, each with labels added as editable
+text and with motion where it helps.
 
-Two loops run while the slide is shown:
+| Slide | Illustration | Technique |
+|-------|--------------|-----------|
+| 2 Four chambers | Servier Medical Art drawing, exported at full resolution from the vector PowerPoint kit | `label_figure.py`: labels in columns with leader lines, fading in one by one |
+| 3 Cardiac cycle | The four Servier drawings of the cycle | A 12 s CSS loop highlights each step in turn, like a GIF, with a progress line |
+| 4 Ventricular walls | AI-generated with ChatGPT through the browser, then checked against Servier | Same labelling; the check found one anatomical error, which is left unlabelled and noted |
 
-- **blood flow**: blue (deoxygenated) and red (oxygenated) dots move along the vessel centre
-  lines with `offset-path`, 8 s per circuit;
-- **cardiac cycle**: atria contract, then ventricles, and the atrioventricular leaflets
-  close during ventricular systole, once per second.
-
-Labels sit outside the heart with leader lines. The static state is a poster frame, so
-PDF export and reduced-motion viewers still get a complete diagram.
+Files: `figures/*.labels.json` (label specs), `figures/manifest.json` (sources, licences,
+the AI prompt and what the anatomy check found), `build/slides.html`, `build/deck.css`.
 
 ```bash
-python ../../skills/html-deck-building/scripts/compose_deck.py --slides build/slides.html --css build/deck.css --title "Heart anatomy (teaching example)" --lang en --cite "Teaching example. Illustration drawn in code for MedSlides." -o build/index.src.html
+python ../../skills/medical-figures/scripts/label_figure.py figures/four-chambers.labels.json -o figures/four-chambers.labelled.svg
+python ../../skills/medical-figures/scripts/label_figure.py figures/heart-chatgpt.labels.json -o figures/heart-chatgpt.labelled.svg
+python ../../skills/html-deck-building/scripts/compose_deck.py --slides build/slides.html --css build/deck.css --title "Heart anatomy (teaching example)" --lang en --cite "Teaching example" -o build/index.src.html
 python ../../skills/html-deck-building/scripts/build_deck.py build/index.src.html out/heart-anatomy.html
 ```
 
-Schematic, not to scale. Before teaching from it, have the anatomy checked by a colleague,
-as you would any figure you draw yourself.
+Licences: the Servier Medical Art images are © Servier, licensed under
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (credited on each slide). The
+AI-generated image is released with this repository under MIT.

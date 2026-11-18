@@ -18,6 +18,9 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
+if hasattr(sys.stdout, "reconfigure"):  # Windows consoles default to cp1252
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from deck_text import load_slides  # noqa: E402
 
@@ -47,6 +50,7 @@ EYEBROW_CLS = re.compile(r"\b(?:eyebrow|kicker|overline|pre-?title|super-?title|
 CARD_CLS = re.compile(r"\b(?:kpi|stat-card|metric-card|metric|stat|card)\b", re.I)
 CHIP_CLS = re.compile(r"\b(?:chip|pill|badge)\b", re.I)
 COUNTER_CLS = re.compile(r"\b(?:num|counter|step-num|section-num|no)\b", re.I)
+CREDIT_CLS = re.compile(r"\b(?:cite|citation|credit|source)\b", re.I)
 EXCLUDE_BODY_CLS = re.compile(r"\b(?:notes|footer|ftr|cite|citation|source|refs?|references?|credit|caption|legend|pg)\b", re.I)
 
 
@@ -61,6 +65,7 @@ class _ElementTexts(html.parser.HTMLParser):
         self.stack: list[dict] = []
         self.elements: list[dict] = []
         self.body: dict[int, list[str]] = defaultdict(list)
+        self.nocredit: dict[int, list[str]] = defaultdict(list)   # visible text minus source credits
 
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
@@ -92,6 +97,8 @@ class _ElementTexts(html.parser.HTMLParser):
             return
         for n in self.stack:
             n["text"].append(data)
+        if not any(t == "aside" for t in tags) and not any(CREDIT_CLS.search(n["cls"]) for n in self.stack if n["cls"]):
+            self.nocredit[self.slide].append(data)
         excluded = any(t in ("svg", "footer", "figcaption", "aside") for t in tags) or \
             any(EXCLUDE_BODY_CLS.search(n["cls"]) for n in self.stack if n["cls"])
         if not excluded:
@@ -150,8 +157,11 @@ def lint_html(path: Path, lang: str, max_words: int | None) -> list[dict]:
             add("S02", idx, _ctx(text, m))
         for m in CUE_ARROW.finditer(text):
             add("S02", idx, _ctx(text, m), "▸ cue marker")
-        for m in PROCESS.finditer(text):
-            add("S03", idx, _ctx(text, m))
+        # S03 ignores source credits: "Illustration: generated with ChatGPT, anatomy checked..."
+        # is a disclosure the audience is owed, not process narration
+        credit_free = " ".join(" ".join(p.nocredit.get(idx, [])).split())
+        for m in PROCESS.finditer(credit_free):
+            add("S03", idx, _ctx(credit_free, m))
         for m in PLACEHOLDER.finditer(text):
             add("S04", idx, _ctx(text, m))
         for m in NUMBERED_LABEL.finditer(text):
