@@ -11,16 +11,18 @@ real talk.
 | 3 Plan | `plan.md` |
 | 4 Evidence | `evidence/references.json`, `evidence/claims.json` |
 | 5 Figures | `figures/` (KM layers made by `figures/make_km.py`, mechanism SVG) and `figures/manifest.json` |
-| 6 Build | `build/index.src.html` (engine + includes), `build/slides.html`, `build/deck.css`, `build/deck.js` → `out/nova1-journal-club.html` |
+| 6 Build | `build/slides.html`, `build/deck.css`, `build/deck.js` → `out/nova1-journal-club.html` |
 | 7 Audit | `audit/slop-report.md`, `audit/evidence-report.md` |
 
-Open `out/nova1-journal-club.html` in a browser. Use → or a clicker to advance; slide 2's
-mechanism runs in four clicks and slide 5 reveals a 24-month marker on click. Press `L` for
+Open `out/nova1-journal-club.html` in a browser. Use → or a clicker to advance. Slide 2's
+mechanism is a looping motion graphic (16 s, four captioned stages); slide 5 reveals a
+24-month marker on click. Press `L` for
 the laser, `C` to circle, `P` for the pen, `N` for speaker notes and `F` for fullscreen.
 
 Rebuild and re-check from this folder:
 
 ```bash
+python ../../skills/html-deck-building/scripts/compose_deck.py --slides build/slides.html --css build/deck.css --js build/deck.js --title "NOVA-1 journal club (fictional demo)" --lang en --cite "NOVA-1 trial report (fictional, for demonstration). All data are invented." -o build/index.src.html
 python ../../skills/html-deck-building/scripts/build_deck.py build/index.src.html out/nova1-journal-club.html
 python ../../skills/html-deck-building/scripts/check_render.py out/nova1-journal-club.html --out build/render --smooth 5
 python ../../skills/slop-audit/scripts/lint_slop.py build/render/dom.html

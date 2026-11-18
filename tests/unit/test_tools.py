@@ -285,3 +285,28 @@ class TestSkillLayout(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestComposeDeck(unittest.TestCase):
+    def test_compose_keeps_engine_and_links_parts(self):
+        mod = load("html-deck-building/scripts/compose_deck.py", "compose_deck")
+        tmp = Path(tempfile.mkdtemp())
+        (tmp / "build").mkdir()
+        for n, t in (("slides.html", '<section class="slide"><h2 class="t">A</h2></section>'), ("deck.css", ":root{--primary:#123456}"),
+                     ("deck.js", "window.x=1;")):
+            (tmp / "build" / n).write_text(t, encoding="utf-8")
+        out = tmp / "build" / "index.src.html"
+        mod.main(["--slides", str(tmp / "build/slides.html"), "--css", str(tmp / "build/deck.css"), "--js",
+                  str(tmp / "build/deck.js"), "--title", "T & P", "--lang", "vi", "--cite", 'Src "A"', "-o", str(out)])
+        s = out.read_text(encoding="utf-8")
+        self.assertIn("<!--include: slides.html-->", s)
+        self.assertIn('<link rel="stylesheet" href="deck.css">', s)
+        self.assertIn('<script src="deck.js"></script>', s)
+        self.assertIn('<html lang="vi">', s)
+        self.assertIn("<title>T &amp; P</title>", s)
+        self.assertIn('data-cite="Src &quot;A&quot;"', s)
+        self.assertIn("window.deck", s)  # the engine itself is there
+        build = load("html-deck-building/scripts/build_deck.py", "build_deck2")
+        r = build.build(out, tmp / "out.html")
+        self.assertEqual(r["missing"], [])
+        self.assertIn("--primary:#123456", (tmp / "out.html").read_text(encoding="utf-8"))

@@ -16,8 +16,8 @@ that keeps it exact:
 | A figure that exists in the source PDF (KM, forest plot, CONSORT) | **Lift the vectors**, recolour to the theme; never redraw a curve | `reuse-from-pdf.md` |
 | A diagram the paper describes but doesn't draw well (trial schema, flow, timeline, algorithm) | **Rebuild as SVG** from claims only | `diagrams.md` |
 | A comparison of numbers (rates, subgroup effects) | **Chart** from claims: dot/dumbbell, bars, forest | `diagrams.md` |
-| Anatomy, cells, molecules, devices | **Licensed library** (Servier Medical Art, Bioicons, NIH BioArt) | `illustrations.md` |
-| A mechanism that unfolds in steps (binding, signalling, pathophysiology) | **Motion graphic** (HTML only); static step panels for PPTX | `motion.md` |
+| Anatomy, cells, molecules, devices | **Licensed library** (Servier Medical Art, Bioicons, NIH BioArt), or a **schematic drawn in SVG** with labels outside the structures | `illustrations.md`, `examples/heart-chambers.html` |
+| A mechanism or physiology that unfolds over time (binding, signalling, blood flow) | **Motion graphic** coded in SVG/CSS (HTML only): click-stepped or looping like a video; static step panels for PPTX | `motion.md`, `examples/checkpoint-blockade.html` |
 
 ## Rules
 

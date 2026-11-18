@@ -1,22 +1,7 @@
 /* Deck-specific styles for the NOVA-1 demo (theme variables live in index.src.html :root) */
 
-/* mechanism scene: classes s0…s4 are set by the engine from data-scene */
-.mech{display:block;width:1333px;height:750px;margin:0 auto}
-.mech .ring,.mech .brake,.mech .cap{opacity:0;transition:opacity .5s ease}
-.mech .tbody{transition:opacity .6s ease}
-.mech .pdl1{transition:transform .9s cubic-bezier(.3,.7,.2,1)}
-.mech .ab{opacity:0;transform:translate(60px,-240px);transition:transform .9s cubic-bezier(.3,.7,.2,1),opacity .4s}
-.mech .gr circle{opacity:0;transition:transform 1s cubic-bezier(.3,.7,.2,1),opacity .4s}
-.mech .tumor{transform-origin:1130px 430px;transition:transform .9s ease 1s,opacity .9s ease 1s}
-.mech:is(.s1,.s3,.s4) .ring{opacity:1}
-.mech.s2 .pdl1{transform:translateX(-46px)}
-.mech.s2 .brake{opacity:1}
-.mech.s2 .tbody{opacity:.45}
-.mech:is(.s3,.s4) .ab{opacity:1;transform:none}
-.mech.s4 .gr circle{opacity:1;transform:translateX(250px)}
-.mech.s4 .gr circle:nth-child(2){transition-delay:.12s}.mech.s4 .gr circle:nth-child(3){transition-delay:.24s}.mech.s4 .gr circle:nth-child(4){transition-delay:.36s}
-.mech.s4 .tumor{transform:scale(.88);opacity:.4}
-.mech.s1 .c1,.mech.s2 .c2,.mech.s3 .c3,.mech.s4 .c4{opacity:1}
+/* mechanism motion graphic: its own <style> lives inside figures/s02-checkpoint.svg */
+.mech{display:block;width:1204px;height:750px;margin:0 auto}
 
 /* diagrams (schema, CONSORT) */
 .dg{position:relative}

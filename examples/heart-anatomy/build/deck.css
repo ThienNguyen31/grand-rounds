@@ -1,0 +1,9 @@
+/* Heart anatomy teaching example */
+:root{--primary:#7A2E2B;--primary-l:#F6E7E6}
+.anat{display:grid;grid-template-columns:1080px 1fr;gap:56px;align-items:center;height:100%}
+.heart{display:block;width:1080px;height:748px}
+.side{font-size:26px;color:var(--ink2)}
+.key{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.key i{width:22px;height:22px;border-radius:50%}
+ol.flow{margin:40px 0 0;padding-left:1.2em;line-height:1.4}
+ol.flow li{margin:0 0 22px}

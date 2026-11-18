@@ -54,8 +54,41 @@ over each step.
 .scene.s3 .ab{ transform:none; opacity:1 }          /* antibody docks onto PD-1 at step 3 */
 ```
 
-A worked example, PD-1/PD-L1 checkpoint blockade in four steps, is in
-`examples/checkpoint-blockade.html`. Open it and press → to step.
+In an HTML deck, put `data-scene="4"` on the SVG: the engine sets class `s0`…`s4` as the
+presenter clicks.
+
+## Looping motion graphics (instead of a video or GIF)
+
+When the mechanism should simply play, as a video would, build a loop in CSS. It stays
+vector and crisp on any projector, weighs kilobytes, can be edited, and never shows a
+player bar.
+
+- One shared duration (12–20 s) for every animated part, `animation-iteration-count:
+  infinite`, and keyframe percentages for each stage of the story.
+- One caption per stage at the bottom, faded in and out on the same timeline, plus a thin
+  progress line, so the audience knows where they are in the loop.
+- The scene fades out over the last 3–4 % and back in, so the jump to the start is invisible.
+- Start the animations only under an ancestor with class `play` (`.play .mech .x {animation:…}`):
+  the deck engine adds it to the active slide, so the loop restarts from the beginning each
+  time the slide appears.
+- Write the **static CSS state as the most informative frame** (the poster), and set
+  `data-poster="0.6"` on the SVG to that point in the loop. Reduced-motion users, PDF
+  export and `check_render.py` screenshots then show that frame.
+- Moving along a curved route (blood flow, transport): `offset-path: path("…")` with
+  `offset-distance` from 0 % to 100 %; stagger many dots with negative `animation-delay`.
+
+Worked examples in `examples/`:
+
+| File | Shows |
+|------|-------|
+| `checkpoint-blockade.html` | PD-1/PD-L1 blockade in four stages, 16 s loop, captions and progress line |
+| `heart-chambers.html` | Four-chamber anatomy with labelled valves and vessels, blood flowing on the vessel centre lines, a 1 s cardiac cycle with atrioventricular valves closing in systole |
+
+## Labels on illustrations
+
+Put labels **outside** the structures, in a column or row, with thin leader lines to the
+part. Labels written inside or across a membrane, a vessel or another label are the most
+common defect of drawn figures; check each one on the rendered slide.
 
 ## Scientific accuracy in motion
 

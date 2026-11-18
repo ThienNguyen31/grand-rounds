@@ -14,9 +14,17 @@ checker. You write slides and theme. You do not rewrite the engine.
 
 ## Procedure
 
-1. Copy `assets/deck-engine.html` to `<talk>/build/index.src.html`. Set `<html lang>`, the
-   `<title>`, and `<body data-cite="…">` (the footer citation for most slides).
-2. **Theme.** Replace the `:root` variables with `theme/theme.json` values. If there is a
+1. Write the slides in `<talk>/build/slides.html`, deck-specific CSS (theme variables
+   first) in `deck.css`, and chart code in `deck.js`. Then assemble the source from the
+   engine, so engine fixes reach every deck:
+
+   ```bash
+   python scripts/compose_deck.py --slides <talk>/build/slides.html --css <talk>/build/deck.css \
+     --js <talk>/build/deck.js --title "<talk> · <presenter>" --lang vi --cite "<footer citation>" \
+     -o <talk>/build/index.src.html
+   ```
+2. **Theme.** Start `deck.css` with a `:root{…}` block holding the `theme/theme.json` values
+   (it overrides the engine defaults). If there is a
    template, rebuild its chrome (header band, footer, logo, title layout) in CSS from the
    measured geometry. Keep the logo as a file and reference it; the build inlines it.
 3. **Slides.** One `<section class="slide" data-name="…">` per row of `plan.md`, in order:
@@ -29,7 +37,9 @@ checker. You write slides and theme. You do not rewrite the engine.
    - a per-slide `data-cite="…"` when the slide's source differs from the deck's.
 4. **Motion.** Use the engine's classes: `.a-in` with `style="--d:.3s"` for staged entry;
    `.draw` with `pathLength="1"` for connectors; `.pop` for arrowheads; `data-frag="n"`
-   for click-revealed overlays. For large figures, use the `.km` wipe structure. Follow
+   for click-revealed overlays; `data-scene="n"` for a mechanism stepped by clicks. A
+   looping motion graphic (a mechanism that plays like a video) carries its own CSS loop
+   and `data-poster`. For large figures, use the `.km` wipe structure. Follow
    `medical-figures` → `motion.md`: transforms and opacity only.
 5. **Build** one offline file:
 

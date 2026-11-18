@@ -15,13 +15,14 @@
   <img alt="Claude Code" src="https://img.shields.io/badge/Claude%20Code-plugin-C8372D">
   <img alt="Codex" src="https://img.shields.io/badge/Codex-skills-56677F">
   <img alt="Antigravity" src="https://img.shields.io/badge/Antigravity-plugin-56677F">
-  <img alt="Tests" src="https://img.shields.io/badge/unit%20tests-20%20passing-2E7D32">
+  <img alt="Tests" src="https://img.shields.io/badge/unit%20tests-21%20passing-2E7D32">
 </p>
 
 <p align="center">
-  <img src="assets/screenshots/kaplan-meier.jpg" width="49%" alt="Kaplan–Meier slide with animated curves">
-  <img src="assets/screenshots/mechanism.jpg" width="49%" alt="Step-wise mechanism animation of PD-1 blockade">
+  <img src="assets/screenshots/mechanism.gif" width="53%" alt="Looping motion graphic: PD-1/PD-L1 checkpoint blockade in four stages">
+  <img src="assets/screenshots/heart-anatomy.gif" width="45%" alt="Animated four-chamber heart with blood flow and valve motion">
 </p>
+<p align="center"><sub>Coded motion graphics, not videos: vector, a few kilobytes, editable, and played inside the slide.</sub></p>
 
 ---
 
@@ -91,7 +92,7 @@ my-talk/
 | `deck-grilling` | model | Interview in rounds of numbered questions, each with a recommended answer. Facts are looked up; decisions are asked. Output format and template are always asked. |
 | `deck-planning` | model | Storyline recipes (journal club, conference, lecture, guideline update, clinical case, M&M), assertion titles, visual grammar, time budget |
 | `evidence-research` | model | PubMed (MCP or bundled `pubmed.py`), Europe PMC full text, ClinicalTrials.gov; a claim ledger with locators and verbatim quotes |
-| `medical-figures` | model | Lift Kaplan–Meier curves and forest plots **as vectors** from the PDF and recolour them; rebuild CONSORT, PRISMA, trial schemas and timelines; licensed illustrations; motion graphics for mechanisms |
+| `medical-figures` | model | Lift Kaplan–Meier curves and forest plots **as vectors** from the PDF and recolour them; rebuild CONSORT, PRISMA, trial schemas and timelines; anatomical schematics drawn in code; licensed illustrations; **looping motion graphics** for mechanisms and physiology |
 | `template-matching` | model | Measure a hospital or congress .pptx (colours, fonts, layouts, title boxes, backgrounds) and reproduce it |
 | `html-deck-building` | model | One offline HTML file: 1920 × 1080 stage, fragments, speaker notes, smooth GPU-only motion, **laser pointer, circle and pen tools** |
 | `pptx-deck-building` | model | Editable PowerPoint inside your template: native shapes for diagrams, native charts, notes |
@@ -121,9 +122,13 @@ my-talk/
 - **Your template, measured.** `scan_template.py` reports the layouts and title positions
   that the template's own slides use, so the deck sits inside the template rather than
   imitating it.
+- **Motion graphics instead of videos.** A mechanism, a pathway or blood moving through the
+  heart is coded as an SVG that loops inside the slide like a GIF. It stays sharp on any
+  projector, weighs kilobytes, carries a caption per stage, and pauses on a poster frame
+  for PDF export and screenshots.
 - **Motion that doesn't stutter.** Only transform and opacity are animated. The render
-  checker measures frame timing; the demo's curve reveal runs at a 16.7 ms median frame
-  interval.
+  checker measures frame timing; the demo's curve reveal and both motion graphics run at a
+  16.6–16.7 ms median frame interval (60 fps).
 
 ## Install
 
@@ -187,16 +192,28 @@ Summarise what changed in the 2025 heart failure guideline for our residents, 20
 The agent starts with a single round of numbered questions. Reply "yes" to accept every
 recommendation, or answer the ones you care about.
 
-## Example
+## Examples
 
-[`examples/fictional-trial/`](examples/fictional-trial) is a complete run on a **fictional**
-trial. Every stage's file is present: brief, plan, claims, figures manifest, built deck and
-both audit reports. Open `out/nova1-journal-club.html` in a browser and use → to step through
-it, `L` for the laser, `C` to circle and `N` for notes.
+[`examples/fictional-trial/`](examples/fictional-trial) is a complete journal-club run on a
+**fictional** trial. Every stage's file is present: brief, plan, claims, figures manifest,
+built deck and both audit reports. Open `out/nova1-journal-club.html` in a browser and use →
+to step through it, `L` for the laser, `C` to circle and `N` for notes.
 
 <p align="center">
+  <img src="assets/screenshots/kaplan-meier.jpg" width="49%" alt="Kaplan–Meier slide with animated curves">
   <img src="assets/screenshots/trial-schema.jpg" width="49%" alt="Trial schema slide">
+</p>
+<p align="center">
   <img src="assets/screenshots/safety.jpg" width="49%" alt="Adverse-event dumbbell plot">
+  <img src="assets/screenshots/mechanism.jpg" width="49%" alt="Mechanism slide, poster frame">
+</p>
+
+[`examples/heart-anatomy/`](examples/heart-anatomy) is a teaching slide: a four-chamber heart
+drawn in code, with labelled valves and great vessels, blood flowing along the vessel centre
+lines and a cardiac cycle in which the atrioventricular valves close during systole.
+
+<p align="center">
+  <img src="assets/screenshots/heart-anatomy.jpg" width="70%" alt="Heart anatomy teaching slide">
 </p>
 
 ## Repository layout
@@ -204,7 +221,8 @@ it, `L` for the laser, `C` to circle and `N` for notes.
 ```
 skills/                 one folder per skill: SKILL.md, references, scripts/, agents/openai.yaml
   medical-deck/roles/   subagent briefs for stages 4–7
-examples/fictional-trial/   an end-to-end run with every intermediate file
+examples/fictional-trial/   an end-to-end journal-club run with every intermediate file
+examples/heart-anatomy/     a teaching slide with an animated anatomical illustration
 tests/unit/             tests for every script (python -m unittest discover -s tests/unit)
 tests/scenarios/        RED/GREEN behaviour scenarios for the skills
 docs/                   architecture and per-harness notes

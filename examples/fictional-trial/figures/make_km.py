@@ -109,9 +109,14 @@ for k, col, label in (("ctl", CTL, "Placebo + anti-PD-1"), ("int", INT, "Vaccine
     for t, s in cens[::max(1, len(cens) // 14)]:   # a readable sample of censor ticks
         if t <= MAXM:
             curves.append(f'<line x1="{xm(t):.1f}" x2="{xm(t):.1f}" y1="{yp(s) - 6:.1f}" y2="{yp(s) + 6:.1f}" stroke="{col}" stroke-width="2"/>')
-    m_lab = 9 if k == "int" else 13
-    y_lab = yp(s_at(steps, m_lab)) + (-18 if k == "int" else 36)
-    curves.append(f'<text x="{xm(m_lab):.1f}" y="{y_lab:.1f}" font-size="21" font-weight="700" fill="{col}">{label}</text>')
+    # Direct labels placed where they cannot touch a curve: the intervention label above its
+    # curve early on (where it is highest), the control label below its own curve at the end,
+    # clear of the lowest point the curve reaches under the label's width.
+    if k == "int":
+        curves.append(f'<text x="{xm(8):.1f}" y="{yp(s_at(steps, 8)) - 18:.1f}" font-size="21" font-weight="700" fill="{col}">{label}</text>')
+    else:
+        lowest = min(s_at(steps, m / 2) for m in range(50, 71))   # months 25–35
+        curves.append(f'<text x="{xm(35):.1f}" y="{yp(lowest) + 38:.1f}" font-size="21" font-weight="700" fill="{col}" text-anchor="end">{label}</text>')
 curves.append("</svg>")
 
 (HERE / "s05-km.base.svg").write_text("\n".join(base), encoding="utf-8")

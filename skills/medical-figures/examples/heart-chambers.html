@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Heart chambers and blood flow: animated anatomical schematic</title>
+<!-- Reference implementation for motion.md, "Anatomy with live flow". Schematic frontal section, not to scale.
+     Open in a browser: it plays and loops like a video, but it is vector, editable and
+     a few kilobytes. In a deck, the engine adds class "play" to the active slide. -->
+<style>html,body{margin:0;height:100%;background:#fff}body{display:grid;place-items:center}svg{width:min(96vw,160vh);height:auto}</style>
+</head>
+<body class="play">
+<svg viewBox="-60 20 1270 880" class="heart" data-poster="0.35" role="img" font-family="Arial, Helvetica, sans-serif"
+     aria-label="Schematic frontal section of the heart: four chambers, valves and great vessels, with blood flowing through the right heart to the lungs and through the left heart to the body">
+<style>
+  /* Schematic, not to scale. Two loops run while an ancestor has class "play":
+     blood flow (dots on the vessel centre lines, 8 s) and the cardiac cycle (1 s). */
+  .heart .wall-o { fill:none; stroke-linecap:round; stroke-linejoin:round }
+  .heart .lbl { font-size:23px; fill:#2A3340 }
+  .heart .lead { stroke:#9AA3AE; stroke-width:1.5; fill:none }
+  .heart .dot { opacity:0 }
+  .play .heart .dot { opacity:1; offset-rotate:0deg; animation:h-flow 8s linear infinite }
+  .heart .d-svc { offset-path:path("M390 70 L390 300 C392 380 405 450 410 520 C418 600 430 680 470 722 C505 742 522 700 515 640 C510 600 500 580 497 560 C500 470 560 380 600 300 L610 255 C660 240 720 240 790 250") }
+  .heart .d-ivc { offset-path:path("M250 880 L250 600 C250 540 275 495 320 470 C370 450 400 480 410 520 C418 600 430 680 470 722 C505 742 522 700 515 640 C510 600 500 580 497 560 C500 470 560 380 600 300 L610 255 C560 245 500 245 455 255") }
+  .heart .d-pv1 { offset-path:path("M1010 360 L860 368 C800 372 760 420 740 470 C722 530 705 600 700 680 C696 740 668 772 640 742 C632 700 626 620 622 560 C618 470 562 400 555 330 L555 230 C555 140 640 95 720 100 C760 103 780 112 790 120 C850 140 880 190 880 260 L880 470") }
+  .heart .d-pv2 { offset-path:path("M1010 450 L860 446 C805 446 772 470 752 512 C730 560 712 620 706 690 C700 748 666 778 636 744 C630 700 626 620 622 560 C618 470 562 400 555 330 L555 230 C555 140 640 95 720 100 C760 103 780 112 790 120 C850 140 880 190 880 260 L880 470") }
+  @keyframes h-flow { from { offset-distance:0% } to { offset-distance:100% } }
+
+  /* cardiac cycle: atria contract, then ventricles; AV valves close in ventricular systole */
+  .heart .atria, .heart .ventricles, .heart .leaf { transform-box:view-box }
+  .heart .atria { transform-origin:560px 520px }
+  .heart .ventricles { transform-origin:580px 540px }
+  .play .heart .atria { animation:h-atria 1s ease-in-out infinite }
+  .play .heart .ventricles { animation:h-vent 1s ease-in-out infinite }
+  .play .heart .leaf { animation:h-leaf 1s ease-in-out infinite }
+  .heart .lt { transform-origin:335px 540px } .heart .rt { transform-origin:465px 540px; --close:38deg }
+  .heart .lm { transform-origin:645px 540px } .heart .rm { transform-origin:805px 540px; --close:38deg }
+  .heart .lt, .heart .lm { --close:-38deg }
+  @keyframes h-atria { 0%,100% { transform:none } 12% { transform:scale(.97) } 24% { transform:none } }
+  @keyframes h-vent  { 0%,26% { transform:none } 45% { transform:scale(.955,.94) } 70%,100% { transform:none } }
+  @keyframes h-leaf  { 0%,26% { transform:none } 32%,62% { transform:rotate(var(--close)) } 70%,100% { transform:none } }
+  @media (prefers-reduced-motion:reduce) { .heart *, .heart { animation:none !important } .heart .dot { opacity:0 } }
+</style>
+
+<!-- great vessels behind the heart: descending aorta, right pulmonary artery -->
+<path d="M790 120 C850 140 880 190 880 260 L880 470" class="wall-o" stroke="#9E3A3A" stroke-width="50" opacity=".55"/>
+<path d="M790 120 C850 140 880 190 880 260 L880 470" class="wall-o" stroke="#EFC4C4" stroke-width="36" opacity=".55"/>
+<path d="M610 255 C560 245 500 245 455 255" class="wall-o" stroke="#3F659C" stroke-width="40"/>
+<path d="M610 255 C560 245 500 245 455 255" class="wall-o" stroke="#C7D7EE" stroke-width="28"/>
+<!-- ascending aorta and arch, with three branches -->
+<path d="M622 140 L622 50 M672 112 L672 34 M722 104 L734 40" class="wall-o" stroke="#9E3A3A" stroke-width="24"/>
+<path d="M622 140 L622 50 M672 112 L672 34 M722 104 L734 40" class="wall-o" stroke="#EFC4C4" stroke-width="14"/>
+<path d="M602 560 C600 470 560 400 555 330 L555 230 C555 140 640 95 720 100 C760 103 780 112 790 120" class="wall-o" stroke="#9E3A3A" stroke-width="56"/>
+<path d="M602 560 C600 470 560 400 555 330 L555 230 C555 140 640 95 720 100 C760 103 780 112 790 120" class="wall-o" stroke="#EFC4C4" stroke-width="42"/>
+<!-- pulmonary trunk (in front of the aorta) and left pulmonary artery -->
+<path d="M497 560 C500 470 560 380 600 300 L610 255 C660 240 720 240 790 250" class="wall-o" stroke="#3F659C" stroke-width="50"/>
+<path d="M497 560 C500 470 560 380 600 300 L610 255 C660 240 720 240 790 250" class="wall-o" stroke="#C7D7EE" stroke-width="37"/>
+<!-- venae cavae and pulmonary veins -->
+<path d="M390 60 L390 310" class="wall-o" stroke="#3F659C" stroke-width="48"/>
+<path d="M390 60 L390 310" class="wall-o" stroke="#C7D7EE" stroke-width="35"/>
+<path d="M250 890 L250 600 C250 540 270 500 300 478" class="wall-o" stroke="#3F659C" stroke-width="50"/>
+<path d="M250 890 L250 600 C250 540 270 500 300 478" class="wall-o" stroke="#C7D7EE" stroke-width="37"/>
+<path d="M1010 360 L850 368 M1010 450 L850 446" class="wall-o" stroke="#9E3A3A" stroke-width="34"/>
+<path d="M1010 360 L850 368 M1010 450 L850 446" class="wall-o" stroke="#EFC4C4" stroke-width="22"/>
+
+<!-- atria -->
+<g class="atria">
+  <path d="M260 410 C260 320 320 290 385 290 C445 290 480 320 480 360 L480 516 C430 530 340 530 300 518 C272 494 260 452 260 410 Z" fill="#D6E3F4" stroke="#B9524D" stroke-width="12"/>
+  <path d="M622 516 L622 380 C622 330 665 300 735 300 C815 300 860 340 860 405 C860 470 834 512 790 520 C730 530 660 528 622 516 Z" fill="#F7D9D9" stroke="#B9524D" stroke-width="12"/>
+</g>
+
+<!-- ventricles: myocardium, then cavities (LV wall thicker than RV wall) -->
+<g class="ventricles">
+  <path d="M285 540 C420 522 740 520 875 536 C905 632 868 755 765 830 C705 875 645 885 612 865 C560 845 470 805 400 745 C330 685 290 615 285 532 Z" fill="#C9625D"/>
+  <path d="M308 560 C380 550 470 548 538 552 L568 770 C532 792 468 768 420 722 C362 668 315 615 308 552 Z" fill="#D6E3F4"/>
+  <path d="M612 552 C690 548 770 550 828 558 C848 632 815 722 748 778 C703 810 655 806 632 778 C612 732 606 640 612 552 Z" fill="#F7D9D9"/>
+  <!-- papillary muscles and chordae -->
+  <path d="M392 712 q12 -26 26 0 M690 752 q12 -26 26 0" fill="#B9524D"/>
+  <path d="M360 590 L404 702 M440 590 L406 702 M672 595 L702 742 M778 595 L704 742" stroke="#F4ECE4" stroke-width="2"/>
+</g>
+
+<!-- valves: tricuspid and mitral leaflets (animated), semilunar cusps -->
+<path class="leaf lt" d="M335 540 Q350 572 380 592" fill="none" stroke="#F6EFE6" stroke-width="9" stroke-linecap="round"/>
+<path class="leaf rt" d="M465 540 Q450 572 420 592" fill="none" stroke="#F6EFE6" stroke-width="9" stroke-linecap="round"/>
+<path class="leaf lm" d="M645 540 Q660 575 695 596" fill="none" stroke="#F6EFE6" stroke-width="10" stroke-linecap="round"/>
+<path class="leaf rm" d="M805 540 Q790 575 755 596" fill="none" stroke="#F6EFE6" stroke-width="10" stroke-linecap="round"/>
+<path d="M478 515 Q497 534 516 515" fill="none" stroke="#F6EFE6" stroke-width="6"/>
+<path d="M581 515 Q601 534 621 515" fill="none" stroke="#F6EFE6" stroke-width="6"/>
+
+<!-- blood: deoxygenated (blue) right heart circuit, oxygenated (red) left heart circuit -->
+<g fill="#2F5E9E">
+  <circle class="dot d-svc" r="7" style="animation-delay:0s"/><circle class="dot d-svc" r="7" style="animation-delay:-1s"/>
+  <circle class="dot d-svc" r="7" style="animation-delay:-2s"/><circle class="dot d-svc" r="7" style="animation-delay:-3s"/>
+  <circle class="dot d-svc" r="7" style="animation-delay:-4s"/><circle class="dot d-svc" r="7" style="animation-delay:-5s"/>
+  <circle class="dot d-svc" r="7" style="animation-delay:-6s"/><circle class="dot d-svc" r="7" style="animation-delay:-7s"/>
+  <circle class="dot d-ivc" r="7" style="animation-delay:-.5s"/><circle class="dot d-ivc" r="7" style="animation-delay:-2.5s"/>
+  <circle class="dot d-ivc" r="7" style="animation-delay:-4.5s"/><circle class="dot d-ivc" r="7" style="animation-delay:-6.5s"/>
+</g>
+<g fill="#B3302B">
+  <circle class="dot d-pv1" r="7" style="animation-delay:0s"/><circle class="dot d-pv1" r="7" style="animation-delay:-1.3s"/>
+  <circle class="dot d-pv1" r="7" style="animation-delay:-2.6s"/><circle class="dot d-pv1" r="7" style="animation-delay:-4s"/>
+  <circle class="dot d-pv1" r="7" style="animation-delay:-5.3s"/><circle class="dot d-pv1" r="7" style="animation-delay:-6.6s"/>
+  <circle class="dot d-pv2" r="7" style="animation-delay:-.7s"/><circle class="dot d-pv2" r="7" style="animation-delay:-2s"/>
+  <circle class="dot d-pv2" r="7" style="animation-delay:-3.3s"/><circle class="dot d-pv2" r="7" style="animation-delay:-4.6s"/>
+  <circle class="dot d-pv2" r="7" style="animation-delay:-6s"/><circle class="dot d-pv2" r="7" style="animation-delay:-7.3s"/>
+</g>
+
+<!-- labels -->
+<path class="lead" d="M232 92 L364 118"/><text class="lbl" x="226" y="98" text-anchor="end">Superior vena cava</text>
+<path class="lead" d="M200 300 L300 360"/><text class="lbl" x="194" y="300" text-anchor="end">Right atrium</text>
+<path class="lead" d="M200 500 L350 565"/><text class="lbl" x="194" y="500" text-anchor="end">Tricuspid valve</text>
+<path class="lead" d="M200 660 L350 640"/><text class="lbl" x="194" y="666" text-anchor="end">Right ventricle</text>
+<path class="lead" d="M200 820 L226 820"/><text class="lbl" x="194" y="827" text-anchor="end">Inferior vena cava</text>
+<path class="lead" d="M904 64 L770 104"/><text class="lbl" x="910" y="70">Aortic arch</text>
+<path class="lead" d="M904 196 L790 250"/><text class="lbl" x="910" y="200">Pulmonary artery</text>
+<path class="lead" d="M1022 300 L830 340"/><text class="lbl" x="1028" y="306">Left atrium</text>
+<text class="lbl" x="1028" y="412">Pulmonary veins</text>
+<path class="lead" d="M1022 520 L790 570"/><text class="lbl" x="1028" y="526">Mitral valve</text>
+<path class="lead" d="M1022 680 L790 660"/><text class="lbl" x="1028" y="686">Left ventricle</text>
+<path class="lead" d="M760 880 L598 790"/><text class="lbl" x="766" y="886">Interventricular septum</text>
+</svg>
+
+</body>
+</html>
