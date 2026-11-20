@@ -171,9 +171,10 @@ agy plugin install https://github.com/drtranquanghung91-vn/grand-rounds
 Antigravity has no Skill tool, so the skills tell the model to read a skill's `SKILL.md`
 when it applies. Subagents use `invoke_subagent`.
 
-> Status of v0.1.0: the Claude Code marketplace manifest passes `claude plugin validate`;
-> the skills were exercised in behaviour scenarios and every script by unit tests and real
-> runs. The Codex and Antigravity manifests follow the layout Superpowers uses for those
+> Status of v0.2.0: the Claude Code plugin and marketplace manifests pass
+> `claude plugin validate` in CI, and the hooks were tested live in Claude Code. The skills
+> were exercised in behaviour scenarios and every script by unit tests on Linux, Windows and
+> macOS. The Codex and Antigravity manifests follow the layout Superpowers uses for those
 > harnesses but have not yet been installed end-to-end. Reports are welcome.
 
 ### Tools the scripts use
