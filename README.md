@@ -140,7 +140,14 @@ my-talk/
 
 Or for one session from a clone: `claude --plugin-dir path/to/grand-rounds`.
 
-On Claude Code the plugin also brings two hooks. They act only inside a talk folder:
+On Claude Code the plugin also brings three hooks:
+
+- **Routing.** A prompt that asks for slides or a presentation gets a reminder to start from
+  the orchestrator and to open with the interview. With many plugins installed, Claude Code
+  drops the descriptions of rarely used skills, and a request could otherwise go straight to
+  a builder.
+
+The other two act only inside a talk folder:
 
 - **Plan gate.** Writes to `build/` and `out/`, and the deck builders, are refused until
   `STATUS.md` records that you approved `plan.md`. The gate is code, so an agent in a hurry
@@ -171,7 +178,7 @@ agy plugin install https://github.com/drtranquanghung91-vn/grand-rounds
 Antigravity has no Skill tool, so the skills tell the model to read a skill's `SKILL.md`
 when it applies. Subagents use `invoke_subagent`.
 
-> Status of v0.2.0: the Claude Code plugin and marketplace manifests pass
+> Status of v0.2.1: the Claude Code plugin and marketplace manifests pass
 > `claude plugin validate` in CI, and the hooks were tested live in Claude Code. The skills
 > were exercised in behaviour scenarios and every script by unit tests on Linux, Windows and
 > macOS. The Codex and Antigravity manifests follow the layout Superpowers uses for those

@@ -1,6 +1,6 @@
 {
   "name": "grand-rounds",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Evidence-first medical presentations: interview, plan, PubMed-backed research, figures and motion graphics, HTML or PPTX build, and audits for AI slop and citation accuracy.",
   "author": {"name": "Trần Quang Hưng", "url": "https://github.com/drtranquanghung91-vn"},
   "homepage": "https://github.com/drtranquanghung91-vn/grand-rounds",

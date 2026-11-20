@@ -34,6 +34,9 @@ presenting) or PowerPoint (.pptx; editable by you and your department)? Or both?
 ➡️ Recommended: <…>
 ```
 
+**Each round ends your turn.** Send the questions and stop: no files, folders, searches for
+the talk's content, or drafts until the user replies.
+
 After each answer, recompute the frontier and ask the next round. A question whose answer
 depends on another question still open belongs to a later round.
 
@@ -82,6 +85,7 @@ Do not plan or build before the user confirms the brief.
 |---------|---------|
 | "PPTX is the safe default" | Format changes the whole build. It is their decision. |
 | "No template mentioned, so none exists" | Ask. Hospitals and congresses usually have one. |
+| "I'll ask, and start on the plan while they read" | Asking means waiting. End the turn after the questions. |
 | "I'll list my assumptions and proceed" | Listing assumptions after deciding is not asking. |
 | "Too many questions will annoy them" | One numbered round with recommendations is fast. Zero rounds leads to rework. |
 | "I'll ask which trial they mean" | If the paper is identifiable, look it up yourself. |

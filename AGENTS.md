@@ -31,9 +31,13 @@ an untested change.
 
 ## Hooks
 
-`hooks/hooks.json` (Claude Code) wires two scripts through `hooks/run-hook.sh`, which picks
+`hooks/hooks.json` (Claude Code) wires three scripts through `hooks/run-hook.sh`, which picks
 whichever Python 3 is installed and does nothing if there is none:
 
+- `route_prompt.py` (UserPromptSubmit): when a prompt asks for slides, a deck or a
+  presentation, adds a reminder to start from `medical-deck` and make the first reply the
+  interview. Claude Code drops the descriptions of rarely used skills when many plugins are
+  installed, so the skill list alone cannot be relied on to route the request.
 - `plan_gate.py` (PreToolUse): inside a talk folder (a folder with `STATUS.md` and
   `brief.md`), refuses writes to `build/` and `out/`, and deck-builder commands, until the
   Plan row of `STATUS.md` says `approved`. `GRAND_ROUNDS_NO_GATE=1` turns it off.
@@ -41,7 +45,7 @@ whichever Python 3 is installed and does nothing if there is none:
   reports blocking slop findings (S01–S04) to the agent.
 
 Hooks must stay silent outside a talk folder and fail open on their own errors. Keep them
-fast: they run on every Write, Edit and Bash call.
+fast: they run on every prompt and every Write, Edit and Bash call.
 
 ## Scripts
 

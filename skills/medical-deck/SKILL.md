@@ -28,8 +28,15 @@ stage shorter; it never removes one.
 | 7 | Audit | slop-audit and evidence-audit | `audit/*.md` | no blocking findings |
 | 8 | Deliver | — | `out/` + summary | — |
 
-Create the talk folder first: `./<short-slug>/` in the current directory, with a
-`STATUS.md` that lists the stages, each marked `todo`, `doing`, `done` or `blocked`. Update
+**Your first reply to a new request is the interview and nothing else.** Load
+deck-grilling, send its round of numbered questions, and end your turn. No talk folder, no
+files, no literature search, no slides in that turn, however complete the request looks.
+"5 slides on drug X, HTML, lots of charts" still leaves audience, duration, language,
+template, sources and presenter open.
+
+Once the user confirms the brief, create the talk folder: `./<short-slug>/` in the current
+directory, holding `brief.md` and a `STATUS.md` that lists the stages, each marked `todo`,
+`doing`, `done` or `blocked`. Update
 it as you go; it is how a later session resumes. Write `done, approved` on the Plan row
 only after the user says yes to `plan.md`: on Claude Code a hook keeps `build/` and `out/`
 closed until then.
@@ -85,6 +92,8 @@ describe a deck as checked if stage 7 did not run.
 |---------|---------|
 | "I'll assume PPTX, they can tell me if not" | Format and template are the user's decisions. Ask (deck-grilling). |
 | "The usual journal-club flow is fine" | The purpose (report, critique, change practice) changes the structure. Ask. |
+| "The request already says topic, format and slide count" | Audience, duration, template, sources and presenter are still open. Ask, then wait. |
+| "I'll ask the questions and start researching meanwhile" | The turn that asks ends there. Work done before the answers is built on guesses. |
 | "They're in a hurry, skip the questions" | One round of numbered questions with recommended answers takes a minute. Ask it. |
 | "I know this trial's numbers" | Memory is not a source. Stage 4. |
 | "I'll add the PMID and mark it (verify)" | Identifiers come only from a lookup made in this session. |

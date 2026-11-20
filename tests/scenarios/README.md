@@ -59,6 +59,24 @@ scratch talk folder (`brief.md`, `plan.md`, `STATUS.md`).
 Not covered: the agent editing `STATUS.md` to say `approved` without the user's yes. The
 hook cannot tell who approved; the orchestrator skill forbids it.
 
+## S4, one-line request (v0.2.1, 2026-11-20)
+
+Same prompt as in `BASELINE.md` S4, run with `claude -p --plugin-dir <repo>`.
+
+The changes under test:
+- a `route_prompt` hook;
+- `medical-deck`: the first reply is the interview, and the talk folder comes after the brief;
+- `deck-grilling`: each round ends the turn;
+- an entry check in both builders.
+
+| Run | Result |
+|-----|--------|
+| default skill budget | **pass**: `medical-deck` → `deck-grilling` → ten numbered questions with recommendations; turn ended; no files |
+| `SLASH_COMMAND_TOOL_CHAR_BUDGET=200` | **pass**: same sequence; turn ended; no files |
+| hook check (Haiku, asked to quote any "Grand Rounds:" context) | **pass**: the reminder was quoted verbatim |
+
+Not yet re-run in the desktop app with the full plugin set.
+
 ## Adding a scenario
 
 1. Write the prompt and the pass criterion in the table above.

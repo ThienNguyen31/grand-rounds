@@ -5,6 +5,14 @@ description: Use when building or editing a medical presentation as an editable 
 
 # PPTX deck building
 
+## Before you start
+
+This skill is stage 6 of grand-rounds:medical-deck. Work only inside a talk folder whose
+`STATUS.md` marks the Plan as `done, approved` and which has `evidence/claims.json`. If
+either is missing, stop and call the Skill tool with grand-rounds:medical-deck instead: it
+runs the interview, the plan and the evidence first. This holds for a new deck from a
+one-line request too.
+
 ## Overview
 
 The user chose PowerPoint because someone will edit the deck after you. Every element

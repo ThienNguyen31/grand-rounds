@@ -434,6 +434,15 @@ class TestHooks(unittest.TestCase):
         self.assertEqual(self.slop.findings_for(self.write("build/slides.html"))[1], [])
         self.assertIsNone(self.slop.findings_for(self.write("brief.md")))
 
+    def test_route_prompt(self):
+        spec = importlib.util.spec_from_file_location("route_prompt", ROOT / "hooks" / "route_prompt.py")
+        rp = importlib.util.module_from_spec(spec); spec.loader.exec_module(rp)
+        for p in ("Làm slide deck 5 slide về Belantamab", "journal club on DREAMM-7",
+                  "chuẩn bị bài thuyết trình suy tim", "make a PowerPoint on sepsis"):
+            self.assertTrue(rp.wants_deck(p), p)
+        for p in ("fix the failing unit test", "/audit-deck out/deck.html", "", "slideshow-free summary"):
+            self.assertFalse(rp.wants_deck(p), p)
+
     def test_hooks_json_points_at_existing_scripts(self):
         import re
         cfg = json.loads((ROOT / "hooks" / "hooks.json").read_text(encoding="utf-8"))

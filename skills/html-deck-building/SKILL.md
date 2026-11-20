@@ -5,6 +5,14 @@ description: Use when building or editing a medical presentation as an HTML deck
 
 # HTML deck building
 
+## Before you start
+
+This skill is stage 6 of grand-rounds:medical-deck. Work only inside a talk folder whose
+`STATUS.md` marks the Plan as `done, approved` and which has `evidence/claims.json`. If
+either is missing, stop and call the Skill tool with grand-rounds:medical-deck instead: it
+runs the interview, the plan and the evidence first. This holds for a new deck from a
+one-line request too.
+
 ## Overview
 
 Start from `assets/deck-engine.html`: a 1920 × 1080 stage that scales to any screen. It has
@@ -52,6 +60,11 @@ checker. You write slides and theme. You do not rewrite the engine.
    ```bash
    python scripts/check_render.py <talk>/out/<name>.html --out <talk>/build/render --smooth <slide with the main animation>
    ```
+
+   It needs Playwright for Python (`pip install playwright`). It uses an installed Edge or
+   Chrome, so `playwright install` is needed only on a machine with neither. If you cannot
+   install it, open the deck in a browser tool and screenshot every slide instead, and say in
+   the delivery report that the automatic check did not run. Never skip the check silently.
 
    Fix every `off-stage` and `clipped-or-overflowing` finding by cutting words, splitting
    the slide, or re-laying out. Never fix overflow by shrinking text below 18 px (body 24 px).

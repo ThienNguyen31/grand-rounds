@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.2.1 (2026-11-20)
+
+### Fixed
+
+- **A one-line request skipped the interview.** For example: "5 slides on belantamab,
+  HTML, lots of charts".
+  - Where many plugins are installed, Claude Code drops the descriptions of rarely used
+    skills, so the request could go straight to `html-deck-building`.
+  - Even when it reached the orchestrator, the agent asked its questions and kept working
+    in the same turn.
+  - Fixes:
+    - A `UserPromptSubmit` hook (`route_prompt.py`) reminds the agent to start from
+      `medical-deck` and to open with the interview.
+    - `medical-deck` now makes the first reply the interview only, and creates the talk
+      folder after the brief is confirmed.
+    - In `deck-grilling`, each round of questions ends the turn.
+    - `html-deck-building` and `pptx-deck-building` send the agent back to `medical-deck`
+      when no approved plan or claim ledger exists.
+- The HTML render check states that `pip install playwright` is enough when Edge or Chrome
+  is installed. If the check cannot run, the agent must say so in the delivery report
+  rather than skip it silently.
+
 ## 0.2.0 (2026-11-20)
 
 The project is now called **Grand Rounds** (repository `grand-rounds`, plugin

@@ -54,3 +54,22 @@ DOI **from memory**, labelled "(verify)".
 **Expected with skills:** identifiers come only from a lookup made in this session (MCP or
 `pubmed.py`) and are recorded in `references.json`; anything else is shown as
 "[reference pending verification]" and listed as a blocker.
+
+## S4 — One-line request with the plugin installed (v0.2.0, 2026-11-20)
+
+Prompt: "Làm giúp tôi slide deck khoảng 5 slide về Belantamab trong đa u tủy, dạng HTML,
+nhiều biểu đồ, có motion graphics cơ chế."
+
+- **In the desktop app** (a user session with about 100 skills installed), the agent called
+  `html-deck-building` directly. It asked no questions and wrote numbers from memory, with
+  no `claims.json`. That session's skill list showed the Grand Rounds skills by name only:
+  Claude Code drops the descriptions of rarely used skills when the listing is over budget.
+- **`claude -p`, default budget:** the agent loaded `medical-deck` and `deck-grilling` and
+  asked ten questions. In the same turn it then wrote `STATUS.md` and `brief.md`, loaded
+  `deck-planning` and started PubMed searches, without waiting for answers.
+- **`claude -p`, `SLASH_COMMAND_TOOL_CHAR_BUDGET=200`** (descriptions dropped): the agent
+  loaded `medical-deck`, skipped the interview, created the talk folder and went straight to
+  literature searches.
+
+Rationalizations: the request "already says" format, slide count and style; ask the
+questions and start the work meanwhile.
