@@ -1,6 +1,6 @@
 ---
 name: template-matching
-description: Use when a medical presentation must follow a supplied template or house style: a hospital, university or congress .pptx/.potx, a previous deck whose look should be copied, a brand guide, or a logo and colour set; also when converting a PowerPoint template's look into an HTML deck.
+description: "Use when a medical presentation must follow a supplied template or house style: a hospital, university or congress .pptx/.potx, a previous deck whose look should be copied, a brand guide, or a logo and colour set; also when converting a PowerPoint template's look into an HTML deck."
 ---
 
 # Template matching

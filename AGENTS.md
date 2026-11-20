@@ -14,8 +14,12 @@
   name. On harnesses without a Skill tool, the agent reads that skill's `SKILL.md`. Don't link
   across skill folders with relative paths. Shared material lives in the skill that owns
   it.
-- `deck_text.py` exists in both `slop-audit/scripts/` and `evidence-audit/scripts/` so that
-  each skill is self-contained. Keep the two copies byte-identical (a unit test checks).
+- Shared code has one copy, in the skill that owns it. `deck_text.py` lives in
+  `evidence-audit/scripts/`; `slop-audit/scripts/lint_slop.py` and the hooks load it from
+  the sibling folder. Never copy it (a unit test checks there is only one). Installing
+  skills one by one therefore needs both `evidence-audit` and `slop-audit`.
+- Quote a frontmatter value that contains `: ` (YAML would otherwise drop the whole
+  frontmatter at load time; a unit test and `claude plugin validate` catch it).
 - Keep `SKILL.md` short (under ~500 words). Move references to sibling `.md` files and
   tools to `scripts/`.
 
@@ -24,6 +28,20 @@
 Write the scenario first, run it without the change, and record what goes wrong. Then make
 the change and re-run. See `tests/scenarios/`. A skill edit that no scenario exercised is
 an untested change.
+
+## Hooks
+
+`hooks/hooks.json` (Claude Code) wires two scripts through `hooks/run-hook.sh`, which picks
+whichever Python 3 is installed and does nothing if there is none:
+
+- `plan_gate.py` (PreToolUse): inside a talk folder (a folder with `STATUS.md` and
+  `brief.md`), refuses writes to `build/` and `out/`, and deck-builder commands, until the
+  Plan row of `STATUS.md` says `approved`. `GRAND_ROUNDS_NO_GATE=1` turns it off.
+- `slop_on_save.py` (PostToolUse): lints saved `.html` slides under `build/` or `out/` and
+  reports blocking slop findings (S01–S04) to the agent.
+
+Hooks must stay silent outside a talk folder and fail open on their own errors. Keep them
+fast: they run on every Write, Edit and Bash call.
 
 ## Scripts
 
@@ -36,7 +54,11 @@ an untested change.
 
 ```bash
 python -m unittest discover -s tests/unit -v
+claude plugin validate .claude-plugin/plugin.json
 ```
+
+CI (`.github/workflows/ci.yml`) runs the unit tests on Linux, Windows and macOS with
+PyMuPDF and python-pptx installed, and `claude plugin validate` on both manifests.
 
 ## Releases
 

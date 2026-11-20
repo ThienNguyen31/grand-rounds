@@ -15,7 +15,7 @@
   <img alt="Claude Code" src="https://img.shields.io/badge/Claude%20Code-plugin-C8372D">
   <img alt="Codex" src="https://img.shields.io/badge/Codex-skills-56677F">
   <img alt="Antigravity" src="https://img.shields.io/badge/Antigravity-plugin-56677F">
-  <img alt="Tests" src="https://img.shields.io/badge/unit%20tests-26%20passing-2E7D32">
+  <a href="https://github.com/drtranquanghung91-vn/grand-rounds/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/drtranquanghung91-vn/grand-rounds/actions/workflows/ci.yml/badge.svg"></a>
 </p>
 
 <p align="center">
@@ -140,6 +140,14 @@ my-talk/
 
 Or for one session from a clone: `claude --plugin-dir path/to/grand-rounds`.
 
+On Claude Code the plugin also brings two hooks. They act only inside a talk folder:
+
+- **Plan gate.** Writes to `build/` and `out/`, and the deck builders, are refused until
+  `STATUS.md` records that you approved `plan.md`. The gate is code, so an agent in a hurry
+  cannot talk its way past it. `GRAND_ROUNDS_NO_GATE=1` switches it off.
+- **Slop on save.** Each slide file saved under `build/` or `out/` is linted at once, and
+  blocking findings (eyebrows, presenter cues, process notes) go straight back to the agent.
+
 ### Codex
 
 The repository ships a Codex plugin manifest (`.codex-plugin/plugin.json`) and a marketplace
@@ -233,6 +241,8 @@ examples/fictional-trial/   an end-to-end journal-club run with every intermedia
 examples/heart-anatomy/     teaching slides: Servier and AI illustrations, labels, a cycle loop
 tests/unit/             tests for every script (python -m unittest discover -s tests/unit)
 tests/scenarios/        RED/GREEN behaviour scenarios for the skills
+hooks/                  Claude Code hooks: plan gate, slop on save
+.github/workflows/      CI: unit tests on Linux, Windows, macOS; plugin validation
 docs/                   architecture and per-harness notes
 .claude-plugin/ .codex-plugin/ .agents/ .antigravity-plugin/   harness manifests
 ```
@@ -242,6 +252,9 @@ docs/                   architecture and per-harness notes
 ```bash
 python -m unittest discover -s tests/unit -v
 ```
+
+CI runs the same tests on Linux, Windows and macOS on every push, plus
+`claude plugin validate` on the plugin and marketplace manifests.
 
 The skills were written test-first, as Superpowers prescribes. Each behaviour was first run
 on an agent without the skills, and the failures were recorded in

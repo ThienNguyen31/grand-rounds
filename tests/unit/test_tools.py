@@ -53,10 +53,10 @@ CLEAN_HTML = """<html><body><div id="stage">
 
 
 class TestDeckText(unittest.TestCase):
-    def test_copies_are_identical(self):
-        a = (SK / "evidence-audit/scripts/deck_text.py").read_bytes()
-        b = (SK / "slop-audit/scripts/deck_text.py").read_bytes()
-        self.assertEqual(a, b, "keep the two deck_text.py copies identical")
+    def test_single_copy(self):
+        copies = sorted(str(p.relative_to(ROOT)) for p in ROOT.rglob("deck_text.py") if ".git" not in p.parts)
+        self.assertEqual(copies, [str(Path("skills/evidence-audit/scripts/deck_text.py"))],
+                         "deck_text.py lives only in evidence-audit; other scripts load it from there")
 
     def test_slides_text_notes_svg(self):
         dt = load("evidence-audit/scripts/deck_text.py", "deck_text_a")
@@ -268,6 +268,10 @@ class TestSkillLayout(unittest.TestCase):
             fm = re.match(r"---\n(.*?)\n---\n", md, re.S)
             self.assertIsNotNone(fm, d.name)
             meta = dict(re.findall(r"^(\w[\w-]*):\s*(.*)$", fm.group(1), re.M))
+            for key, val in meta.items():   # a plain YAML scalar may not contain ": " or " #"
+                if not val.startswith(('"', "'")):
+                    self.assertNotRegex(val, r": | #", f"{d.name}: quote the {key} value in the frontmatter")
+            meta = {k: v[1:-1] if v[:1] in "\"'" and v[-1:] == v[:1] else v for k, v in meta.items()}
             self.assertEqual(meta["name"], d.name)
             self.assertLessEqual(len(meta["description"]), 1024)
             names.add(d.name)
@@ -288,9 +292,6 @@ class TestSkillLayout(unittest.TestCase):
              for f in (".claude-plugin/plugin.json", ".codex-plugin/plugin.json", ".antigravity-plugin/plugin.json")}
         self.assertEqual(len(v), 1, v)
 
-
-if __name__ == "__main__":
-    unittest.main()
 
 
 class TestComposeDeck(unittest.TestCase):
@@ -377,3 +378,71 @@ class TestBioicons(unittest.TestCase):
         mod = load("medical-figures/scripts/bioicons.py", "bioicons2")
         c = mod.credit({"name": "t-lymphocyte", "author": "Servier", "licence": "cc-by-3.0"})
         self.assertEqual(c, '"t-lymphocyte" by Servier (Bioicons), CC BY 3.0')
+
+
+class TestHooks(unittest.TestCase):
+    """The Claude Code plugin hooks in hooks/: plan gate and slop-on-save."""
+
+    def setUp(self):
+        sys.path.insert(0, str(ROOT / "hooks"))
+        import talk  # noqa: F401
+        spec = importlib.util.spec_from_file_location("plan_gate", ROOT / "hooks" / "plan_gate.py")
+        self.gate = importlib.util.module_from_spec(spec); spec.loader.exec_module(self.gate)
+        spec = importlib.util.spec_from_file_location("slop_on_save", ROOT / "hooks" / "slop_on_save.py")
+        self.slop = importlib.util.module_from_spec(spec); spec.loader.exec_module(self.slop)
+        self.tmp = Path(tempfile.mkdtemp())
+        self.talk = self.tmp / "my-talk"
+        (self.talk / "build").mkdir(parents=True)
+        (self.talk / "brief.md").write_text("# brief", encoding="utf-8")
+        (self.talk / "plan.md").write_text("# plan", encoding="utf-8")
+        self.status("doing, awaiting approval")
+
+    def status(self, state):
+        (self.talk / "STATUS.md").write_text(
+            f"| # | Stage | State |\n|---|---|---|\n| 3 | Plan | {state} | plan.md |\n", encoding="utf-8")
+
+    def write(self, rel):
+        return {"tool_name": "Write", "tool_input": {"file_path": str(self.talk / rel)}, "cwd": str(self.tmp)}
+
+    def test_gate_blocks_build_until_approved(self):
+        self.assertEqual(self.gate.blocked_talks(self.write("build/slides.html")), [self.talk])
+        self.assertEqual(self.gate.blocked_talks(self.write("plan.md")), [])
+        for state in ("done, not approved", "awaiting approval", "unapproved"):
+            self.status(state)
+            self.assertEqual(self.gate.blocked_talks(self.write("out/deck.html")), [self.talk], state)
+        for state in ("done, approved", "xong, đã duyệt"):
+            self.status(state)
+            self.assertEqual(self.gate.blocked_talks(self.write("build/slides.html")), [], state)
+
+    def test_gate_bash_builders_and_outside_paths(self):
+        bash = {"tool_name": "Bash", "cwd": str(self.tmp),
+                "tool_input": {"command": "python skills/html-deck-building/scripts/compose_deck.py my-talk/build/index.src.html"}}
+        self.assertEqual(self.gate.blocked_talks(bash), [self.talk])
+        bash["tool_input"]["command"] = "ls my-talk/build"
+        self.assertEqual(self.gate.blocked_talks(bash), [])
+        other = {"tool_name": "Write", "tool_input": {"file_path": str(self.tmp / "elsewhere" / "out" / "x.html")}}
+        self.assertEqual(self.gate.blocked_talks(other), [])
+        (self.talk / "plan.md").unlink()
+        self.status("done, approved")
+        self.assertEqual(self.gate.blocked_talks(self.write("build/x.html")), [self.talk], "no plan.md")
+
+    def test_slop_on_save(self):
+        (self.talk / "build" / "slides.html").write_text(SLOP_HTML, encoding="utf-8")
+        path, blocking = self.slop.findings_for(self.write("build/slides.html"))
+        self.assertTrue({"S01", "S02"} <= {f["id"] for f in blocking})
+        (self.talk / "build" / "slides.html").write_text(CLEAN_HTML, encoding="utf-8")
+        self.assertEqual(self.slop.findings_for(self.write("build/slides.html"))[1], [])
+        self.assertIsNone(self.slop.findings_for(self.write("brief.md")))
+
+    def test_hooks_json_points_at_existing_scripts(self):
+        import re
+        cfg = json.loads((ROOT / "hooks" / "hooks.json").read_text(encoding="utf-8"))
+        cmds = [h["command"] for ev in cfg["hooks"].values() for m in ev for h in m["hooks"]]
+        self.assertTrue(cmds)
+        for c in cmds:
+            script = re.search(r"run-hook\.sh\" (\S+)", c).group(1)
+            self.assertTrue((ROOT / "hooks" / script).is_file(), script)
+
+
+if __name__ == "__main__":
+    unittest.main()

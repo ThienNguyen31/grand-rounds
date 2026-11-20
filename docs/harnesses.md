@@ -9,11 +9,14 @@ the actions to each harness.
 | Load a skill | Skill tool | skill picker / implicit invocation | read the skill's `SKILL.md` with the file-read tool |
 | User-only skills | `disable-model-invocation: true` | `policy.allow_implicit_invocation: false` in `agents/openai.yaml` | listed; the model is told not to call them itself |
 | Dispatch a subagent | Agent/Task tool (general-purpose) | `spawn_agent` / `wait_agent` (needs `[features] multi_agent = true`) | `invoke_subagent` with TypeName `self` |
+| Plan gate and slop-on-save hooks | `hooks/hooks.json`, loaded with the plugin | not wired; the skills' gates still apply | not wired; the skills' gates still apply |
 | Track stages | `STATUS.md` in the talk folder (plus the harness's own todo tool if any) | same | same; Antigravity's task artifact may mirror it |
 
 No harness gets a session-start hook. Grand Rounds activates only when a request is about a
 medical presentation, through the skills' descriptions, so it stays quiet during other
-work.
+work. The Claude Code hooks act only on files inside a talk folder (one with `STATUS.md`
+and `brief.md`): they hold `build/` and `out/` closed until `STATUS.md` records the plan as
+approved, and lint each saved slide file for blocking slop.
 
 ## Testing a harness port
 

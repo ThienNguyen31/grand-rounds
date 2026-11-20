@@ -21,7 +21,15 @@ from pathlib import Path
 if hasattr(sys.stdout, "reconfigure"):  # Windows consoles default to cp1252
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+# deck_text.py has one copy, owned by the evidence-audit skill next to this one.
+_HERE = Path(__file__).resolve().parent
+for _d in (_HERE, _HERE.parents[1] / "evidence-audit" / "scripts"):
+    if (_d / "deck_text.py").is_file():
+        sys.path.insert(0, str(_d))
+        break
+else:
+    sys.exit("lint_slop: deck_text.py not found. Install the evidence-audit skill next to slop-audit "
+             "(both come with the grand-rounds plugin).")
 from deck_text import load_slides  # noqa: E402
 
 BLOCKING = {"S01", "S02", "S03", "S04"}

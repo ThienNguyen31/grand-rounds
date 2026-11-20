@@ -1,0 +1,29 @@
+{
+  "description": "Grand Rounds: hold deck builds until plan.md is approved, and lint saved slides for AI slop. Both stay silent outside a talk folder.",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/run-hook.sh\" plan_gate.py",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/run-hook.sh\" slop_on_save.py",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

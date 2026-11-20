@@ -1,5 +1,7 @@
 """Shared helper: extract visible text per slide from an HTML deck or a .pptx file.
 
+This is the only copy. slop-audit's lint_slop.py and the plugin hooks load it from here.
+
 HTML decks: each <section class="slide ..."> is a slide; <aside class="notes"> is speaker
 notes (returned separately), <script>/<style> are ignored. PPTX needs python-pptx.
 """

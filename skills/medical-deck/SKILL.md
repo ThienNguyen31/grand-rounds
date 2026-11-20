@@ -30,7 +30,9 @@ stage shorter; it never removes one.
 
 Create the talk folder first: `./<short-slug>/` in the current directory, with a
 `STATUS.md` that lists the stages, each marked `todo`, `doing`, `done` or `blocked`. Update
-it as you go; it is how a later session resumes.
+it as you go; it is how a later session resumes. Write `done, approved` on the Plan row
+only after the user says yes to `plan.md`: on Claude Code a hook keeps `build/` and `out/`
+closed until then.
 
 Stage 4 still runs when the user supplies the paper: their PDF becomes the source, and
 claims are extracted from it with page/table/figure locators. Search only fills gaps.

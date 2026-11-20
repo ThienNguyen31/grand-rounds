@@ -1,6 +1,6 @@
 ---
 name: medical-figures
-description: Use when a medical slide needs a figure: reusing a Kaplan–Meier curve, forest plot or diagram from a paper PDF, drawing a CONSORT/PRISMA flow, trial schema, timeline or algorithm, charting trial data, finding a licensed anatomical or molecular illustration, or animating a mechanism, pathophysiology or drug action.
+description: "Use when a medical slide needs a figure: reusing a Kaplan–Meier curve, forest plot or diagram from a paper PDF, drawing a CONSORT/PRISMA flow, trial schema, timeline or algorithm, charting trial data, finding a licensed anatomical or molecular illustration, or animating a mechanism, pathophysiology or drug action."
 ---
 
 # Medical figures
