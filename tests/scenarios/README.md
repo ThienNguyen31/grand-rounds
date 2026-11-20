@@ -45,6 +45,20 @@ with bracketed placeholders and a fast route to fill it from PubMed.
 the original. `question-tree.md` now recommends reusing the original vector figure whenever
 the source PDF is supplied.
 
+## Hooks, live (Claude Code 2.1.226, 2026-11-20)
+
+Run with `claude -p --plugin-dir <repo> --model sonnet --permission-mode acceptEdits` in a
+scratch talk folder (`brief.md`, `plan.md`, `STATUS.md`).
+
+| Case | Plan row in STATUS.md | Request | Result |
+|------|-----------------------|---------|--------|
+| H1 | `doing, waiting for the user` | Write `build/slides.html` | **pass**: refused by `plan_gate`, file not created, agent quoted the reason |
+| H2 | same | Bash: `python …/compose_deck.py --help > …` | **pass**: refused by `plan_gate` before running |
+| H3 | `done, approved` | Write a slide with an eyebrow and `▸ Bấm tiếp: …` | **pass**: written; `slop_on_save` returned S01 and S02 to the agent |
+
+Not covered: the agent editing `STATUS.md` to say `approved` without the user's yes. The
+hook cannot tell who approved; the orchestrator skill forbids it.
+
 ## Adding a scenario
 
 1. Write the prompt and the pass criterion in the table above.
