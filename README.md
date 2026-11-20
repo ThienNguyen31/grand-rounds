@@ -48,18 +48,9 @@ inspired by Matt Pocock's [grilling](https://github.com/mattpocock/skills) skill
 
 ## How it works
 
-```mermaid
-flowchart LR
-  A[1 Interview<br/>deck-grilling] -->|brief.md ✔ user| B[2 Template<br/>template-matching]
-  B --> C[3 Plan<br/>deck-planning]
-  C -->|plan.md ✔ user approves| D[4 Evidence<br/>evidence-research]
-  D -->|claims.json| E[5 Figures<br/>medical-figures]
-  E --> F[6 Build<br/>HTML or PPTX]
-  F --> G[7 Audit<br/>slop + evidence]
-  G -->|blocking findings| D
-  G -->|blocking findings| F
-  G -->|pass| H[8 Deliver]
-```
+<p align="center">
+  <img src="assets/workflow.png" width="100%" alt="Grand Rounds workflow: your materials go to the orchestrator (1 interview, 2 template, 3 plan, with two gates that wait for you); fresh subagents then run 4 evidence, 5 figures, 6 build and 7 audit, with a fix loop of up to three rounds; 8 deliver. Every stage writes a file to the talk folder.">
+</p>
 
 The **orchestrator** skill (`medical-deck`) runs the stages. Stages 4–7 go to fresh
 **subagents** with written role briefs: evidence researcher, figure maker, deck builder,
