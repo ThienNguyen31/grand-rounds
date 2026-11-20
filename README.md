@@ -2,7 +2,7 @@
   <img src="assets/logo.png" width="96" alt="Grand Rounds logo">
 </p>
 
-<h1 align="center">Grand Rounds</h1>
+<h1 align="center">Grand Rounds: A Multi-Agent Harness for<br>Evidence-First Medical Presentations</h1>
 
 <p align="center">
   <b>Evidence-first medical presentations, built by your coding agent.</b><br>
