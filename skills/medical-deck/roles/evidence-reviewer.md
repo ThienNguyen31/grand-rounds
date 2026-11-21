@@ -16,7 +16,8 @@ Inputs:
 
 - Deck: `{{talk}}/out/{{file}}`
 - Claims: `{{talk}}/evidence/claims.json`; references: `{{talk}}/evidence/references.json`
-- Sources: `{{talk}}/sources/`
+- Sources: `{{talk}}/sources/` and their text layer `{{talk}}/sources/_text/`
+- Slide source with placeholders: `{{talk}}/build/slides.html` (HTML decks)
 - Figures manifest: `{{talk}}/figures/manifest.json`
 - Deck type: {{e.g. clinical case}}. Case decks get the privacy check.
 

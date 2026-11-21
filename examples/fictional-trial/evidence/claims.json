@@ -97,17 +97,42 @@
    "text": "RFS at 24 months, vaccine vs placebo, with HR",
    "values": [
     "24 months",
-    "79.1%",
-    "67.0%",
-    "0.62",
-    "0.47",
-    "0.81"
+    {
+     "key": "rfs_vax",
+     "v": "79.1%",
+     "measure": "KM rate",
+     "arm": "vaccine"
+    },
+    {
+     "key": "rfs_pbo",
+     "v": "67.0%",
+     "measure": "KM rate",
+     "arm": "placebo"
+    },
+    {
+     "key": "hr",
+     "v": "0.62",
+     "measure": "HR"
+    },
+    {
+     "key": "lo",
+     "v": "0.47",
+     "measure": "HR 95% CI lower"
+    },
+    {
+     "key": "hi",
+     "v": "0.81",
+     "measure": "HR 95% CI upper"
+    }
    ],
    "source": "nova1",
    "locator": "p. 4, Results; Fig. 2",
    "quote": "Recurrence-free survival at 24 months was 79.1% with vaccine plus anti-PD-1 and 67.0% with placebo plus anti-PD-1 (hazard ratio for recurrence or death, 0.62; 95% CI, 0.47 to 0.81).",
    "kind": "observed",
-   "status": "verified-fulltext"
+   "status": "verified-fulltext",
+   "endpoint": "RFS",
+   "population": "ITT",
+   "timepoint": "24 months"
   },
   {
    "id": "c08",
@@ -232,19 +257,50 @@
    "text": "Overall survival at 24 months, deaths and HR",
    "values": [
     "24 months",
-    "89.1%",
-    "86.7%",
-    "69",
-    "39",
-    "0.81",
-    "0.52",
-    "1.27"
+    {
+     "key": "os_vax",
+     "v": "89.1%",
+     "measure": "KM rate",
+     "arm": "vaccine"
+    },
+    {
+     "key": "os_pbo",
+     "v": "86.7%",
+     "measure": "KM rate",
+     "arm": "placebo"
+    },
+    {
+     "key": "deaths_vax",
+     "v": "69"
+    },
+    {
+     "key": "deaths_pbo",
+     "v": "39"
+    },
+    {
+     "key": "hr",
+     "v": "0.81",
+     "measure": "HR"
+    },
+    {
+     "key": "lo",
+     "v": "0.52",
+     "measure": "HR 95% CI lower"
+    },
+    {
+     "key": "hi",
+     "v": "1.27",
+     "measure": "HR 95% CI upper"
+    }
    ],
    "source": "nova1",
    "locator": "p. 4, Results; Fig. 3",
    "quote": "Overall survival data were immature (hazard ratio for death, 0.81; 95% CI, 0.52 to 1.27). Death occurred in 69 and 39 patients, respectively; overall survival at 24 months was 89.1% and 86.7% (Fig. 3).",
    "kind": "observed",
-   "status": "verified-fulltext"
+   "status": "verified-fulltext",
+   "endpoint": "OS",
+   "population": "ITT",
+   "timepoint": "24 months"
   },
   {
    "id": "c16",

@@ -16,8 +16,12 @@ identifier you remember, even one marked "(verify)", does not go into any file.
 
 ## Sources, in order
 
-1. Files the user supplied (`<talk>/sources/`). Read the full text: results, tables,
-   figure legends, supplement if given.
+1. Files the user supplied (`<talk>/sources/`). First run
+   `python scripts/ingest_sources.py <talk>`: it writes page-numbered text to
+   `sources/_text/` with each file's SHA-256, flags OCR'd pages, and reads the DOI/PMID
+   printed in the paper. Read the full text (results, tables, figure legends, supplement);
+   copy quotes from `sources/_text/`, since that is the text they will be checked against.
+   Give each such reference a `"file": "sources/<name>"`.
 2. The database tools the user allowed in the brief. If the user named one (for example
    "OpenEvidence only"), use only that one and record what it could not give you as a gap.
 3. Otherwise:
@@ -34,7 +38,13 @@ Record every search string and its date in `evidence/notes.md`.
 For each claim the plan lists:
 
 - Copy the number exactly as printed, with its unit, CI and P value. Keep the
-  denominator.
+  denominator. Bind it: write a value as an object with `key`, `v`, and what it measures
+  (`measure`, `endpoint`, `population`, `timepoint`, `arm`); claim-level `endpoint`,
+  `population`, `timepoint` cover all values. Endpoint names are canonical (`RFS`, `OS`,
+  `clinical-remission`…; list in evidence-audit `scripts/claim_values.py`).
+- A number from a table: give `quote_cells` (row label and cells, e.g.
+  `["grade 3 or higher", "21.4%", "19.5%"]`) instead of a prose quote.
+- Numbers from an OCR'd page: check each one against the page image yourself.
 - Record the **locator** (page, table, figure panel, section) and a **verbatim quote** of
   20–60 words that contains the number.
 - Classify it with `kind`:
@@ -71,7 +81,15 @@ For each claim the plan lists:
   "kind": "observed", "status": "verified-fulltext"}]}
 ```
 
+A value in full form: `{"key": "hr", "v": "0.58", "measure": "HR", "endpoint": "RFS",
+"population": "ITT"}`. The deck builder writes `{{c07.hr}}` on the slide instead of
+typing the number. Guidelines get `"type": "guideline"`, `"version_date"`, and, without a
+PMID/DOI, `"url"` and `"checked_on"`.
+
 `pubmed.py refs PMID…` prints reference records in this shape from a real lookup.
+
+Before handing over, run evidence-audit's `verify_quotes.py` on your ledger: it finds each
+quote in the source text and fails on a changed number, wrong page or paraphrase.
 
 ## Common mistakes
 

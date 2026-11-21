@@ -4,6 +4,9 @@ This is the only copy. slop-audit's lint_slop.py and the plugin hooks load it fr
 
 HTML decks: each <section class="slide ..."> is a slide; <aside class="notes"> is speaker
 notes (returned separately), <script>/<style> are ignored. PPTX needs python-pptx.
+
+Count-up numbers (<span data-count="79.1" data-dec="1" data-suf="%">0</span>) are read as
+the value the audience finally sees (79.1%), not the "0" in the static file.
 """
 from __future__ import annotations
 
@@ -21,6 +24,7 @@ class _SlideParser(html.parser.HTMLParser):
         self.stack: list[tuple[str, str]] = []  # (tag, role)
         self.cur: dict | None = None
         self.depth_in_slide = 0
+        self.counting = 0  # depth of open data-count elements: their static text is replaced
 
     def _role(self, tag, attrs):
         cls = dict(attrs).get("class", "") or ""
@@ -42,6 +46,17 @@ class _SlideParser(html.parser.HTMLParser):
             cls = dict(attrs).get("class")
             if cls:
                 self.cur["classes"].append((tag, cls))
+        a = dict(attrs)
+        if self.cur is not None and a.get("data-count") not in (None, "") and tag not in VOID:
+            try:
+                val = float(a["data-count"])
+                dec = int(a.get("data-dec") or 0)
+                shown = f"{val:.{dec}f}" + (a.get("data-suf") or "")
+            except ValueError:
+                shown = a["data-count"]
+            self._emit(f" {shown} ")
+            role = role or "count"
+            self.counting += 1
         if tag not in VOID:
             self.stack.append((tag, role))
         if tag == "br" and self.cur is not None:
@@ -52,14 +67,23 @@ class _SlideParser(html.parser.HTMLParser):
             t, role = self.stack.pop()
             if role == "slide":
                 self.cur = None
+            if role == "count":
+                self.counting -= 1
             if t == tag:
                 break
+
+    def _emit(self, data):
+        if self.cur is None:
+            return
+        self.cur["text"].append(data)
+        if not any(t == "svg" for t, _ in self.stack):
+            self.cur["nosvg"].append(data)
 
     def handle_data(self, data):
         if self.cur is None:
             return
         roles = [r for _, r in self.stack]
-        if "skip" in roles:
+        if "skip" in roles or self.counting:
             return
         if "notes" in roles:
             self.cur["notes"].append(data)

@@ -6,6 +6,8 @@ Copy this brief into the subagent prompt and fill every `{{…}}`.
 
 You build a medical presentation from an approved plan, verified claims and finished
 figures. You do not add facts, numbers or figures that are not in those files.
+In an HTML deck every number is a `{{claim.key}}` placeholder filled at build time;
+you never type a number onto a slide.
 
 Load the skill **{{html-deck-building | pptx-deck-building}}** (call the Skill tool with that
 name; if there is no Skill tool, read its `SKILL.md`). Follow it exactly.

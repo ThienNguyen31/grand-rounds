@@ -1,5 +1,45 @@
 # Changelog
 
+## 0.3.0 (2026-11-21)
+
+Evidence hardening: the checks that matter most no longer rest on the agent's own ledger.
+
+### Added
+
+- `evidence-research/scripts/ingest_sources.py`: page-numbered text for every PDF,
+  Markdown or text source in `sources/`, with SHA-256 (version pin), OCR for pages without a
+  text layer (flagged for checking by eye), and DOI/PMID read from the paper.
+- `evidence-audit/scripts/verify_quotes.py`: finds each claim's quote in the source text.
+  Wording may match loosely (Unicode, ligatures, line-break hyphens, dashes, Lancet
+  decimal point); numbers must match exactly. NUMBER_MISMATCH, LOCATOR, PARAPHRASE,
+  NOT_FOUND, STALE and ENDPOINT block. `quote_cells` checks table values.
+- Structured claim values (`evidence-audit/scripts/claim_values.py`, single copy): each
+  number can carry its measure, endpoint, population, time point and arm, with an
+  English–Vietnamese endpoint vocabulary (oncology and IBD end points) that a talk can
+  extend in `evidence/endpoints.json`.
+- `check_claims.py`: LABEL (a number shown under a different endpoint than its claim,
+  judged panel by panel), HANDTYPED with `--src` (numbers typed instead of placeholders).
+- `build_deck.py --claims`: `{{c07.hr}}`, `{{c07.hr|vi}}`, `{{c07.rfs|num}}` placeholders
+  filled from the ledger; unknown or unfilled placeholders fail the build.
+- `verify_refs.py`: retraction and correction check (PubMed CommentsCorrections and
+  publication type; Crossref `updated-by` and update notices), INCOMPLETE for records with
+  nothing to compare, guideline age note, MANUAL and FICTIONAL statuses.
+- `tests/unit/test_evidence_hardening.py` (29 tests, offline).
+
+### Fixed
+
+- Count-up numbers (`data-count`) were read as "0" by `check_claims.py`, so the headline
+  numbers of a slide were never checked. `deck_text.py` now reads their final value.
+- Integers 0–10 were never checked (grade 4, 3 doses, NNT 7); they are now, except where
+  they only number things (Fig. 2, Table 3, step 1). `--skip-small` restores the old rule.
+  Names such as PD-1, IL-23, NOVA-1 no longer count as numbers.
+
+### Changed
+
+- The fictional-trial example: its source is ingested, its reference points at the file,
+  slide 5 is built from placeholders (byte-identical output), and the deck was rebuilt with
+  the current engine.
+
 ## 0.2.1 (2026-11-20)
 
 ### Fixed

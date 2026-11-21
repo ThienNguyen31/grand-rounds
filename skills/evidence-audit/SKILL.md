@@ -17,18 +17,27 @@ passage for every claim; do not trust the ledger's quote.
 
    ```bash
    python scripts/verify_refs.py <talk>/evidence/references.json
-   python scripts/check_claims.py <talk>/out/<deck> <talk>/evidence/claims.json --refs <talk>/evidence/references.json
+   python scripts/verify_quotes.py <talk>/evidence/claims.json --refs <talk>/evidence/references.json
+   python scripts/check_claims.py <talk>/out/<deck> <talk>/evidence/claims.json --refs <talk>/evidence/references.json \
+       --src <talk>/build/slides.html
    python scripts/phi_scan.py <talk>/out/<deck>
    ```
 
-   - `verify_refs` confirms that each PMID/DOI exists and that its title, year and first
-     author match the record.
-   - `check_claims` lists every number on every slide that no claim covers, claims whose
-     values are missing from their own quote, and claims citing unknown references.
+   - `verify_refs` confirms that each PMID/DOI exists, that title, year and first author
+     match, and that the paper is not retracted (RETRACTED, CONCERN block; CORRECTED means
+     re-check the numbers against the erratum). Old guidelines get a recheck note.
+   - `verify_quotes` finds every quote in the ingested source text (`sources/_text/`):
+     NUMBER_MISMATCH, LOCATOR, PARAPHRASE, NOT_FOUND, STALE and ENDPOINT block; OCR means
+     check the numbers against the page image. If `sources/_text/` is missing, run
+     evidence-research's `ingest_sources.py` first.
+   - `check_claims` lists every number on every slide that no claim covers (count-up
+     numbers included), numbers under the wrong endpoint (LABEL), numbers typed into the
+     slide source instead of `{{claim.key}}` (HANDTYPED), claims whose values are missing
+     from their own quote, and claims citing unknown references.
    - `phi_scan` flags dates, record numbers, phone numbers, ID numbers and names.
 
-2. **Read each claim against its source**: open the source at the locator. Check for each
-   claim:
+2. **Read each claim against its source**: open the source at the locator. The scripts
+   prove the quote exists; you judge whether it supports the slide. Check for each claim:
    - the value, unit, CI, P value and denominator;
    - the right endpoint, population (ITT, per-protocol, subgroup) and time point;
    - observed results versus protocol assumptions;

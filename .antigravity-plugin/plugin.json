@@ -1,7 +1,7 @@
 {
   "name": "grand-rounds",
   "displayName": "Grand Rounds",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Evidence-first medical slide decks: interview, plan, PubMed research, figures, HTML or PPTX, and audits for AI slop and citations.",
   "logo": "assets/logo.png",
   "suggestedPrompts": ["Make a journal club deck on this paper", "Audit my conference slides before tomorrow"],

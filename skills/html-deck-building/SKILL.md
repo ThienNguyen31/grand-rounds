@@ -38,8 +38,10 @@ checker. You write slides and theme. You do not rewrite the engine.
 3. **Slides.** One `<section class="slide" data-name="…">` per row of `plan.md`, in order:
    - the plan's assertion as the title (`h2.t`, or the template's title element);
    - the visual from `figures/` via `<!--include: ../figures/s05-km.svg-->` or `<img>`;
-   - only numbers from `claims.json`, written as in the source and formatted for the
-     deck's language (`0,58` in Vietnamese, `0.58` in English);
+   - only numbers from `claims.json`, as placeholders, never typed: `{{c07.hr}}`,
+     `{{c07.hr|vi}}` for Vietnamese notation (`0,58`, `1.204`), `{{c07.rfs|num}}` for the
+     bare number (also inside `data-count="…"`). A number with no claim needs a claim
+     first (stage 4);
    - `<aside class="notes">` with what the presenter says, including cues such as
      "[click] 24-month landmark". **Cues never go on the slide.**
    - a per-slide `data-cite="…"` when the slide's source differs from the deck's.
@@ -52,8 +54,11 @@ checker. You write slides and theme. You do not rewrite the engine.
 5. **Build** one offline file:
 
    ```bash
-   python scripts/build_deck.py <talk>/build/index.src.html <talk>/out/<name>.html
+   python scripts/build_deck.py <talk>/build/index.src.html <talk>/out/<name>.html \
+     --claims <talk>/evidence/claims.json
    ```
+
+   An unknown claim or key fails the build.
 
 6. **Check** with a real browser:
 

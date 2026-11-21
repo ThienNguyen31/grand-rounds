@@ -1,5 +1,19 @@
-{"references": [
-  {"id": "nova1", "title": "NOVA-1 trial report (fictional, for demonstration)", "authors": ["Demo A"],
-   "journal": "", "year": 2026, "doi": "", "pmid": "", "fictional": true,
-   "retrieved_with": "user-supplied file sources/nova1-fictional-report.md", "access": "full-text"}
-]}
+{
+ "references": [
+  {
+   "id": "nova1",
+   "title": "NOVA-1 trial report (fictional, for demonstration)",
+   "authors": [
+    "Demo A"
+   ],
+   "journal": "",
+   "year": 2026,
+   "doi": "",
+   "pmid": "",
+   "fictional": true,
+   "retrieved_with": "user-supplied file sources/nova1-fictional-report.md",
+   "access": "full-text",
+   "file": "sources/nova1-fictional-report.md"
+  }
+ ]
+}

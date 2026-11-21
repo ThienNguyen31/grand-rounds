@@ -91,9 +91,9 @@
       <div class="kmp a-in" style="--d:0.15s">
         <div class="kmh">
           <div class="ep"><span>A</span>Recurrence-free survival</div>
-          <div class="pair"><span class="a" data-count="79.1" data-dec="1" data-suf="%">0</span><i>vs</i><span class="b" data-count="67.0" data-dec="1" data-suf="%">0</span></div>
+          <div class="pair"><span class="a" data-count="{{c07.rfs_vax|num}}" data-dec="1" data-suf="%">0</span><i>vs</i><span class="b" data-count="{{c07.rfs_pbo|num}}" data-dec="1" data-suf="%">0</span></div>
         </div>
-        <div class="hrl"><b>HR 0.62</b> (95% CI 0.47–0.81) · 128 vs 98 events · at 24 months</div>
+        <div class="hrl"><b>HR {{c07.hr}}</b> (95% CI {{c07.lo}}–{{c07.hi}}) · 128 vs 98 events · at 24 months</div>
         <div class="km" style="width:834px;height:593px;--wipe-from:-86.7%;--wipe-back:86.7%">
           <!--include: ../figures/s05-km-rfs.base.svg-->
           <div class="wipe"><div class="wipe-in"><!--include: ../figures/s05-km-rfs.curves.svg--></div></div>
@@ -108,9 +108,9 @@
       <div class="kmp a-in" style="--d:0.3s">
         <div class="kmh">
           <div class="ep"><span>B</span>Overall survival <em>immature</em></div>
-          <div class="pair"><span class="a" data-count="89.1" data-dec="1" data-suf="%">0</span><i>vs</i><span class="b" data-count="86.7" data-dec="1" data-suf="%">0</span></div>
+          <div class="pair"><span class="a" data-count="{{c15.os_vax|num}}" data-dec="1" data-suf="%">0</span><i>vs</i><span class="b" data-count="{{c15.os_pbo|num}}" data-dec="1" data-suf="%">0</span></div>
         </div>
-        <div class="hrl"><b>HR 0.81</b> (95% CI 0.52–1.27) · 69 vs 39 deaths · at 24 months</div>
+        <div class="hrl"><b>HR {{c15.hr}}</b> (95% CI {{c15.lo}}–{{c15.hi}}) · {{c15.deaths_vax}} vs {{c15.deaths_pbo}} deaths · at 24 months</div>
         <div class="km" style="width:834px;height:593px;--wipe-from:-86.7%;--wipe-back:86.7%">
           <!--include: ../figures/s05-km-os.base.svg-->
           <div class="wipe"><div class="wipe-in"><!--include: ../figures/s05-km-os.curves.svg--></div></div>

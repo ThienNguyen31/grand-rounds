@@ -150,10 +150,12 @@ class TestVerifyRefs(unittest.TestCase):
                       "year": 2024, "first_author": "Weber JS", "doi": "10.1/X"}
 
     def test_verified(self):
-        self.assertEqual(self.mod.verify(self.rec, pubmed=lambda p: self.found)[0], "VERIFIED")
+        self.assertEqual(self.mod.verify(self.rec, pubmed=lambda p: self.found, pubmed_notices=lambda p: [])[0],
+                         "VERIFIED")
 
     def test_mismatch_year_and_doi(self):
-        st, notes = self.mod.verify({**self.rec, "year": 2023, "doi": "10.9/other"}, pubmed=lambda p: self.found)
+        st, notes = self.mod.verify({**self.rec, "year": 2023, "doi": "10.9/other"}, pubmed=lambda p: self.found,
+                                    pubmed_notices=lambda p: [])
         self.assertEqual(st, "MISMATCH")
         self.assertEqual(len(notes), 2)
 

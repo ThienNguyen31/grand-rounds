@@ -22,12 +22,14 @@ Produce:
 - `{{talk}}/evidence/references.json`
 - `{{talk}}/evidence/claims.json`, one record per claim the plan needs
 - `{{talk}}/evidence/notes.md`: search strings, dates, what was not found
+- `{{talk}}/sources/_text/` from `ingest_sources.py`, and a clean `verify_quotes.py` run
 
 Finish with a report of at most 150 words in this shape:
 
 ```
 STATUS: done | blocked
 CLAIMS: <n total> (<n> full text, <n> abstract only, <n> unverified)
+QUOTES: <n> verbatim, <n> fuzzy/OCR (listed), <n> not checkable (no source file)
 GAPS: <claims the plan needs that you could not source, by slide number>
 CONFLICTS: <sources that disagree, with ids>
 ```

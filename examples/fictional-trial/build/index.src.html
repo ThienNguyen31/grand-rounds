@@ -282,7 +282,7 @@ window.deck = {
   finish: () => { document.getAnimations().forEach(a => {
       try { a.finish(); } catch (_) {
         const t = a.effect.getTiming(), host = a.effect.target?.closest?.('[data-poster]');
-        a.pause(); a.currentTime = (t.delay || 0) + (host ? parseFloat(host.dataset.poster) : 0.5) * t.duration;
+        a.pause(); a.currentTime = (host ? parseFloat(host.dataset.poster) : 0.5) * t.duration;  // keeps staggered delays
       } });
     $$('[data-count]', slides[cur]).forEach(e => { cancelAnimationFrame(e._raf);
       e.textContent = vi(parseFloat(e.dataset.count), +(e.dataset.dec || 0)) + (e.dataset.suf || ''); }); },
