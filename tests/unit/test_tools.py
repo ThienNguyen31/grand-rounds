@@ -292,6 +292,8 @@ class TestSkillLayout(unittest.TestCase):
     def test_manifests_agree(self):
         v = {json.loads((ROOT / f).read_text(encoding="utf-8"))["version"]
              for f in (".claude-plugin/plugin.json", ".codex-plugin/plugin.json", ".antigravity-plugin/plugin.json")}
+        market = json.loads((ROOT / ".claude-plugin" / "marketplace.json").read_text(encoding="utf-8"))
+        v |= {p["version"] for p in market["plugins"] if p["name"] == "grand-rounds" and "version" in p}
         self.assertEqual(len(v), 1, v)
 
 

@@ -28,6 +28,8 @@ Evidence hardening: the checks that matter most no longer rest on the agent's ow
 
 ### Fixed
 
+- `.claude-plugin/marketplace.json` still said 0.2.1, so installs from the marketplace
+  reported the old version. `test_manifests_agree` now checks the marketplace entry too.
 - Count-up numbers (`data-count`) were read as "0" by `check_claims.py`, so the headline
   numbers of a slide were never checked. `deck_text.py` now reads their final value.
 - Integers 0–10 were never checked (grade 4, 3 doses, NNT 7); they are now, except where
